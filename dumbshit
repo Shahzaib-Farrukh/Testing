@@ -1,14 +1,5 @@
-pipeline {
-    agent any
-
-    stages {
-        stage('Snyk Security Scan') {
-            steps {
-                script {
-                    // Execute Snyk security scan
-                    sh 'snyk test'
-                }
-            }
-        }
-    }
-}
+docker run -it \
+    -e "SNYK_TOKEN=<TOKEN>" \
+    -v "<PROJECT_DIRECTORY>:/project" \
+    -v "/home/user/.gradle:/home/node/.gradle" \
+  snyk/snyk:gradle:6.4 test --org=my-org-name
