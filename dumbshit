@@ -2,21 +2,11 @@ pipeline {
     agent any
 
     stages {
-        stage('Build Docker Image and Scan with Snyk') {
+        stage('Snyk Security Scan') {
             steps {
                 script {
-                    // Get the directory where the Jenkinsfile resides
-                    def workspaceDir = pwd()
-
-                    // Path to the Dockerfile
-                    def dockerfilePath = "${workspaceDir}/pols/php-apache-moodledemo/Dockerfile"
-
-                    // Build Docker image
-                    sh "docker build -t my-image -f ${dockerfilePath} ${workspaceDir}"
-
-                    // Scan Docker image with Snyk
-                    echo 'Scanning Docker image with Snyk...'
-                    sh 'snyk container test my-image'
+                    // Execute Snyk security scan
+                    sh 'snyk test'
                 }
             }
         }
