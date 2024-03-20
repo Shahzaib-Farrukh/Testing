@@ -1,22 +1,19 @@
-pipeline {
-    agent any
-
-    stages {
-        stage('Build Docker Image') {
+stages {
+        stage('Build Docker Image and Scan with Snyk') {
             steps {
-                echo 'Building Docker image...'
-                sh 'docker build -t my-image .'
+                script {
+                    // Get the directory where the Jenkinsfile resides
+                    def workspaceDir = pwd()
+
+                    // Build Docker image
+                    sh "docker build -t my-image ${workspaceDir}"
+
+                    // Scan Docker image with Snyk
+                    echo 'Scanning Docker image with Snyk...'
+                    sh 'snyk container test my-image'
+                }
             }
         }
-
-        stage('Snyk Security Scan') {
-            steps {
-                echo 'Scanning Docker image with Snyk...'
-                sh 'snyk container test my-image'
-            }
-        }
-
-        // Add more stages as needed
     }
 
     post {
@@ -24,4 +21,3 @@ pipeline {
             // Clean up or additional post-build actions
         }
     }
-}
