@@ -1,1 +1,27 @@
-sh 'snyk test --all-projects --json --org=your-org-name --token=snyk-jenkins'
+pipeline {
+    agent any
+
+    stages {
+        stage('Build Docker Image') {
+            steps {
+                echo 'Building Docker image...'
+                sh 'docker build -t my-image .'
+            }
+        }
+
+        stage('Snyk Security Scan') {
+            steps {
+                echo 'Scanning Docker image with Snyk...'
+                sh 'snyk container test my-image'
+            }
+        }
+
+        // Add more stages as needed
+    }
+
+    post {
+        always {
+            // Clean up or additional post-build actions
+        }
+    }
+}
