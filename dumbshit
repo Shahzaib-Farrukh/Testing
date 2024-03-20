@@ -9,7 +9,7 @@ pipeline {
                     def workspaceDir = pwd()
 
                     // Path to the Dockerfile
-                    def dockerfilePath = "${workspaceDir}/Pols/image\ builders/pols/php-apache-moodle/Dockerfile"
+                    def dockerfilePath = "${workspaceDir}/pols/php-apache-moodledemo/Dockerfile"
 
                     // Build Docker image
                     sh "docker build -t my-image -f ${dockerfilePath} ${workspaceDir}"
