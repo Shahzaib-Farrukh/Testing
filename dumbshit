@@ -1,1 +1,6 @@
-snykSecurity(credentialsId: 'your-snyk-credentials-id', targetFile: 'composer.lock')
+stage('Snyk Security Scan') {
+            steps {
+                // Execute Snyk security scan
+                snykSecurity(credentialsId: 'your-snyk-credentials-id', targetFile: 'composer.lock')
+            }
+        }
