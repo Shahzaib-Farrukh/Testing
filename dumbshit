@@ -4,3 +4,8 @@ stage('Snyk Security Scan') {
                 snykSecurity(credentialsId: 'your-snyk-credentials-id', targetFile: 'composer.lock')
             }
         }
+
+
+def params = [
+    snykTokenID: 'snyk'
+]
