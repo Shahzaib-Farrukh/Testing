@@ -1,11 +1,1 @@
-stage('Snyk Security Scan') {
-            steps {
-                // Execute Snyk security scan
-                snykSecurity(credentialsId: 'your-snyk-credentials-id', targetFile: 'composer.lock')
-            }
-        }
-
-
-def params = [
-    snykTokenID: 'snyk'
-]
+b53e2c25583e82abe3dabbd85f8e7e7a
