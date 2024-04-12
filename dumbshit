@@ -1,1 +1,34 @@
-b53e2c25583e82abe3dabbd85f8e7e7a
+Vulnerability Scan Documentation for SOC 2 Compliance
+
+Introduction
+This document presents the findings from our recent periodic vulnerability scans. It serves to demonstrate our commitment to maintaining robust security practices in line with SOC 2 compliance requirements, specifically addressing the management of technical vulnerabilities and ensuring network security.
+
+Methodology
+Our security team conducted a comprehensive vulnerability scan on [Date] using [Vulnerability Scanning Tool Name]. The scan was performed across all our critical systems to identify any potential security weaknesses that could be exploited.
+
+Findings
+Attached are the screenshots from the vulnerability scans. Key vulnerabilities identified include:
+
+[Vulnerability Name 1]: Found in [System/Network Component], posing a [High/Medium/Low] risk with potential to [Impact Description].
+[Vulnerability Name 2]: Located in [System/Network Component], classified as [High/Medium/Low] severity due to its ability to [Impact Description].
+Related Frameworks and Controls
+The identified vulnerabilities relate to the following frameworks and controls:
+
+ISO 27001 Control A.12.6.1 – Management of technical vulnerabilities: Requires regular reviews and necessary actions to mitigate identified risks.
+SOC 2 CC 6.6 – Vulnerabilities scanned and remediated: Emphasizes the need for timely detection and response to vulnerabilities.
+Action Items
+For each identified vulnerability, we have implemented the following remediation steps:
+
+[Vulnerability Name 1]: [Remediation Action], assigned to [Team/Individual].
+[Vulnerability Name 2]: [Remediation Action], overseen by Erwin Llereza.
+Time Sensitivity and Recurrence
+The findings are timely, uploaded during the SOC 2 observation window. The scans and subsequent report renewals will occur quarterly, ensuring continuous monitoring and improvement of our security posture.
+
+Conclusion
+This vulnerability scan is integral to our SOC 2 Type II reporting and demonstrates our proactive approach to cybersecurity. It underscores our ongoing efforts to safeguard our assets and client data against emerging threats.
+
+Appendices
+Additional notes and observations from the vulnerability scans are detailed below:
+
+[Additional Note 1]
+[Additional Note 2]
