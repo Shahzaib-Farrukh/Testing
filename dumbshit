@@ -37,3 +37,21 @@ In line with SOC 2 requirements, these findings were recorded within the designa
 
 Conclusion
 The execution of these vulnerability scans is a testament to our unwavering dedication to security. Through continual assessment and improvement, we uphold our commitment to protect our clients and our operational infrastructure.
+
+
+
+
+
+
+
+Vulnerability 1: Linux Kernel Use-After-Free in Netfilter
+Package: kernel
+Installed Version: 4.14.330-250.540.amzn2.aarch64
+Required Version: 4.14.336-256.559.amzn2
+Severity: High
+Risk Level: Critical
+CVE: CVE-2024-1086
+Vulnerability Description: A use-after-free vulnerability was identified in the Linux kernel's netfilter: nf_tables component that could potentially be exploited to achieve local privilege escalation. This flaw exists due to a mishandling in the nft_verdict_init() function which could cause a double free vulnerability when nf_drop is issued.
+Impact: This vulnerability could allow an attacker with local access to escalate their privileges on the affected system.
+Remediation Steps: Immediate upgrade to the patched kernel version is recommended to mitigate this vulnerability. The required version, 4.14.336-256.559.amzn2, contains the necessary fixes to address this issue.
+Assigned To: Security Operations Team
