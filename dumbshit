@@ -55,3 +55,47 @@ Vulnerability Description: A use-after-free vulnerability was identified in the 
 Impact: This vulnerability could allow an attacker with local access to escalate their privileges on the affected system.
 Remediation Steps: Immediate upgrade to the patched kernel version is recommended to mitigate this vulnerability. The required version, 4.14.336-256.559.amzn2, contains the necessary fixes to address this issue.
 Assigned To: Security Operations Team
+
+Vulnerability 2: Ubuntu Kernel Security Issues
+Package: linux
+Installed Version: 5.19.0-1025-aws
+Required Version: 5.19.0-1029
+Severity: High
+CVE: CVE-2023-35001 (and 8 more)
+Vulnerability Description: Security updates have been issued by Ubuntu to address multiple vulnerabilities in the Linux kernel. These vulnerabilities could potentially affect system integrity, confidentiality, and availability if not remediated.
+Impact: Without the security update, the system remains at risk for the vulnerabilities which may include privilege escalation, denial of service, or information disclosure.
+Remediation Steps: It is recommended to update the Linux kernel to the required version, 5.19.0-1029, to fix the identified vulnerabilities and protect against potential exploits.
+Assigned To: Infrastructure Management Team
+
+Vulnerability 3: ImageMagick Security Flaws
+Package: imagemagick and related components
+Installed Version: 8:6.9.11.60+dfsg-1.3ubuntu0.22.04.3
+Required Version: 8:6.9.11.60+dfsg-1.3ubuntu0.22.04.3+esm2
+Severity: High
+CVE: CVE-2021-20244 (and 19 more)
+Vulnerability Description: The Ubuntu security team has issued updates for multiple vulnerabilities affecting the ImageMagick software package. These vulnerabilities could potentially lead to a range of security breaches if left unpatched.
+Impact: The vulnerabilities present in the current version of ImageMagick could allow attackers to perform actions such as code execution, information leaks, or denial of service attacks.
+Remediation Steps: To mitigate these vulnerabilities, an update to the latest ImageMagick version specified by the security advisory is necessary. The update addresses the security issues and brings the package up to the secure version.
+Assigned To: Application Maintenance Team
+
+Vulnerability 4: OpenEXR Library Security Vulnerabilities
+Package: libopenexr25
+Installed Version: 2.5.7-1
+Required Version: 2.5.7-1ubuntu0.1~esm1
+Severity: High
+CVE: CVE-2021-23215 (and 6 more)
+Vulnerability Description: A security update has been issued for the OpenEXR library to address several identified vulnerabilities that could compromise system security.
+Impact: The vulnerabilities within the OpenEXR library may allow attackers to exploit security weaknesses, potentially leading to unauthorized access or service disruptions.
+Remediation Steps: The system requires an update to the patched version of the OpenEXR library. The updated version has been released to address these security concerns and mitigate the associated risks.
+Assigned To: Development Team
+
+Vulnerability 5: ImageMagick Vulnerability Update
+Package: imagemagick and associated libraries
+Installed Version: 8:6.9.11.60+dfsg-1.3ubuntu0.22.04.3
+Required Version: 8:6.9.11.60+dfsg-1.3ubuntu0.22.04.3+esm3
+Severity: High
+CVE: CVE-2023-5341 (and others)
+Vulnerability Description: Ubuntu has provided a security update for multiple vulnerabilities found in ImageMagick, a popular image processing suite used in various applications. These vulnerabilities could be exploited to affect the confidentiality, integrity, and availability of the system.
+Impact: Given the nature of the ImageMagick vulnerabilities, they could potentially allow for arbitrary code execution, leading to unauthorized actions within the system.
+Remediation Steps: Upgrading to the latest provided version of ImageMagick is crucial to mitigate the identified security risks. The required version contains patches for the vulnerabilities noted.
+Assigned To: Systems Security Team
