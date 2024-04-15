@@ -56,7 +56,9 @@ Impact: This vulnerability could allow an attacker with local access to escalate
 Remediation Steps: Immediate upgrade to the patched kernel version is recommended to mitigate this vulnerability. The required version, 4.14.336-256.559.amzn2, contains the necessary fixes to address this issue.
 Assigned To: Security Operations Team
 
-Vulnerability 2: Ubuntu Kernel Security Issues
+---------------------------------------------------------
+
+Vulnerability 1: Ubuntu Kernel Security Issues
 Package: linux
 Installed Version: 5.19.0-1025-aws
 Required Version: 5.19.0-1029
@@ -67,7 +69,7 @@ Impact: Without the security update, the system remains at risk for the vulnerab
 Remediation Steps: It is recommended to update the Linux kernel to the required version, 5.19.0-1029, to fix the identified vulnerabilities and protect against potential exploits.
 Assigned To: Infrastructure Management Team
 
-Vulnerability 3: ImageMagick Security Flaws
+Vulnerability 2: ImageMagick Security Flaws
 Package: imagemagick and related components
 Installed Version: 8:6.9.11.60+dfsg-1.3ubuntu0.22.04.3
 Required Version: 8:6.9.11.60+dfsg-1.3ubuntu0.22.04.3+esm2
@@ -78,7 +80,7 @@ Impact: The vulnerabilities present in the current version of ImageMagick could 
 Remediation Steps: To mitigate these vulnerabilities, an update to the latest ImageMagick version specified by the security advisory is necessary. The update addresses the security issues and brings the package up to the secure version.
 Assigned To: Application Maintenance Team
 
-Vulnerability 4: OpenEXR Library Security Vulnerabilities
+Vulnerability 3: OpenEXR Library Security Vulnerabilities
 Package: libopenexr25
 Installed Version: 2.5.7-1
 Required Version: 2.5.7-1ubuntu0.1~esm1
@@ -89,7 +91,7 @@ Impact: The vulnerabilities within the OpenEXR library may allow attackers to ex
 Remediation Steps: The system requires an update to the patched version of the OpenEXR library. The updated version has been released to address these security concerns and mitigate the associated risks.
 Assigned To: Development Team
 
-Vulnerability 5: ImageMagick Vulnerability Update
+Vulnerability 4: ImageMagick Vulnerability Update
 Package: imagemagick and associated libraries
 Installed Version: 8:6.9.11.60+dfsg-1.3ubuntu0.22.04.3
 Required Version: 8:6.9.11.60+dfsg-1.3ubuntu0.22.04.3+esm3
