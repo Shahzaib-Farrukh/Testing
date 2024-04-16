@@ -1,3 +1,19 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ssm:StartSession",
+                "ssm:TerminateSession",
+                "ssm:ResumeSession"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
+
+
 Vulnerability Scan Documentation for SOC 2 Compliance
 
 Introduction
