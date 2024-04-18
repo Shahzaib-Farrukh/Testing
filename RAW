@@ -1,2 +1,5 @@
+Scheduled Maintenance:
+To maintain the security posture of the system, regular maintenance practices were implemented to ensure that all software components, including Kernel-tools, remain up-to-date. This may include setting up automated update schedules or implementing proactive monitoring systems to detect vulnerabilities promptly.
+By following these remediation steps, the vulnerability associated with Kernel-tools version 4.14.330-250.540.amzn2.aarch64 was effectively mitigated through the upgrade to the latest version, Kernel-tools 4.14.336-257.568.amzn2.aarch64.
 
-After updating the kernel-tools, our organization felt more secure. This update addressed vulnerabilities and strengthened our digital defenses. However, our commitment to vigilance and proactive cybersecurity remains ongoing as we adapt to emerging threats and maintain a resilient security posture.
+
