@@ -1,4 +1,14 @@
-This document serves as a comprehensive overview of the remediation steps undertaken to address a vulnerability identified within our system. In today's dynamic and ever-evolving threat landscape, maintaining the security and integrity of our infrastructure is paramount. Vulnerabilities, if left unaddressed, can pose significant risks to the confidentiality, integrity, and availability of our data and systems. Therefore, it is imperative to have robust remediation processes in place to promptly identify, assess, and mitigate any vulnerabilities that may arise. This document outlines the systematic approach taken to remediate the identified vulnerability, detailing each step of the process from initial identification to final verification. Through meticulous analysis, proactive measures, and diligent follow-up, we ensure that our systems remain resilient against potential security threats, thereby safeguarding our organization's assets and maintaining trust with our stakeholders.
-
-curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_64bit/session-manager-plugin.deb" -o "session-manager-plugin.deb"
-
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ssm:StartSession",
+                "ssm:TerminateSession",
+                "ssm:ResumeSession"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
