@@ -1,14 +1,15 @@
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Effect": "Allow",
-            "Action": [
-                "ssm:StartSession",
-                "ssm:TerminateSession",
-                "ssm:ResumeSession"
-            ],
-            "Resource": "*"
-        }
-    ]
-}
+Welcome to the Product Documentation site. Here you will find links to the various environments we support. Each environment serves a specific purpose and caters to different regions and project needs. Below are the public links to access these environments.
+
+Environments
+1. UK Environment
+This environment serves the UK region and is designed for general usage. It includes all the core functionalities and features needed for our UK users.
+
+Public Link: UK Environment
+2. UK Apps Environment
+The UK Apps environment is dedicated to our applications specifically tailored for the UK market. It hosts various apps that are optimized for regional requirements and regulations.
+
+Public Link: UK Apps Environment
+3. US Projects Environment
+This environment is focused on our projects within the United States. It provides tools and resources necessary for managing and deploying US-based projects effectively.
+
+Public Link: US Projects Environment
