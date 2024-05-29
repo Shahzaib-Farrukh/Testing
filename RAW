@@ -1,5 +1,33 @@
-if (class_exists('ACF')) {
+<?php
+// 02/12/2022 - Google optimize script handling
+if (function_exists('get_field')) {
     $google_optimize = get_field('optimize_ab_experiment');
+    $anti_flicker = get_field('anti_flicker_script');
 } else {
-    error_log('ACF plugin is not active or installed.');
+    $google_optimize = false; // Default value if ACF is not active
+    $anti_flicker = false; // Default value if ACF is not active
 }
+
+// Anti flicker script must be placed first
+if ($anti_flicker) {
+    ?>
+    <!-- anti-flicker snippet (recommended) -->
+    <style>.async-hide { opacity: 0 !important} </style>
+    <script>(function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*new Date;
+        h.end=i=function(){s.className=s.className.replace(RegExp(' ?'+y),'')};
+        (a[n]=a[n]||[]).hide=h;setTimeout(function(){i();h.end=null},c);
+        })(window,document.documentElement,'async-hide','dataLayer',4000,
+        {'OPT-5ZM32L':true});</script>
+    <?php
+}
+
+if ($google_optimize) {
+    ?>
+    <!-- Google Optimize -->
+    <script src="https://www.googleoptimize.com/optimize.js?id=OPT-5ZM32L"></script>
+    <!-- End Google Optimize -->
+    <?php
+}
+?>
+<meta charset="<?php bloginfo('charset'); ?>">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
