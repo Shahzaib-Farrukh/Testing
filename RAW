@@ -1,7 +1,5 @@
-I wanted to clarify a significant misunderstanding regarding our use of SendGrid. We are not utilizing SendGrid for marketing purposes. Our use of SendGrid is strictly limited to the distribution of notes and assignments among our internal associates, which include college faculty and students.
+Changes to systems within the development lifecycle shall be controlled by the use of formal change control procedures. Change control procedures and requirements are described in the Boundless Learning Operations Security Policy.
 
-The links contained in our emails are simply notes and assignments for academic purposes. We kindly request that you verify these links manually to confirm their nature.
+Significant code changes must be reviewed by the DevOps Team and approved by Erwin Llereza before being merged into any production branch in accordance with the Boundless Learning process. Our infrastructure changes are managed using Agile methodologies, specifically through sprint cycles, ensuring that all tasks are completed within defined time frames and are ready for review.
 
-We hope this clears up any confusion and appreciate your understanding and assistance in resolving this matter.
-
-Thank you
+Change control procedures shall ensure that the development, testing, and deployment of changes are not performed by a single individual without approval and oversight.
