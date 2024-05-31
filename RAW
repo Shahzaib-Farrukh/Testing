@@ -1,33 +1,13 @@
-<?php
-$id = get_the_ID();
-global $post;
-$course_name = '';
-$page_type = '';
-$content_type = '';
+#!/bin/bash
 
-// Get value content type for data layer
-if (function_exists('get_field')) {
-    if (get_field('course_name')) {
-        $course_name = get_field('course_name');
-    }
+# MySQL credentials
+USER="your_username"
+PASSWORD="your_password"
+DATABASE="your_database"
 
-    // Get value page type for data layer
-    if (get_field('page_type')) {
-        $page_type = get_field('page_type');
-    }
-
-    // Get value content type for data layer
-    if (get_field('content_type')) {
-        $content_type = get_field('content_type');
-    }
-}
-?>
-<script data-layers="pearsonDL">
-    window.pearsonDL = window.pearsonDL || {};
-    pearsonDL.events = [];
-    window.pearsonDL.screen = {
-        pageType: "<?php echo $page_type; ?>",
-        contentType: "<?php echo $content_type; ?>",
-        platformType: "pearson"
-    };
-</script>
+# MySQL command to truncate tables
+mysql -u $USER -p$PASSWORD $DATABASE <<EOF
+TRUNCATE TABLE sessions;
+TRUNCATE TABLE ban_ip;
+TRUNCATE TABLE flood;
+EOF
