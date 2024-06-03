@@ -1,13 +1,16 @@
-#!/bin/bash
-
-# MySQL credentials
-USER="your_username"
-PASSWORD="your_password"
-DATABASE="your_database"
-
-# MySQL command to truncate tables
-mysql -u $USER -p$PASSWORD $DATABASE <<EOF
-TRUNCATE TABLE sessions;
-TRUNCATE TABLE ban_ip;
-TRUNCATE TABLE flood;
-EOF
+INSERT INTO ban_ip (ip_address) VALUES
+('10.244.216.1'),
+('10.244.216.50'),
+('10.244.216.100'),
+('10.244.218.25'),
+('10.244.218.75'),
+('10.244.218.125'),
+('10.244.217.10'),
+('10.244.217.60'),
+('10.244.217.110'),
+('10.244.219.5'),
+('10.244.219.55'),
+('10.244.219.105'),
+('10.244.216.200'),
+('10.244.218.150'),
+('10.244.217.175');
