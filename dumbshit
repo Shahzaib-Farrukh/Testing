@@ -1,11 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Page</title>
-</head>
-<body>
-    <h1>It works</h1>
-</body>
-</html>
+#!/bin/bash
+
+# Define your subnets
+SUBNETS=("10.244.216.0/24" "10.244.218.0/24" "10.244.217.0/24" "10.244.219.0/24")
+
+# Function to convert IP to integer
+ip_to_int() {
+    local ip=$1
+    local a b c d
+    IFS=. read -r a b c d <<< "$ip"
+    echo "$((a << 24 | b << 16 | c << 8 | d))"
+}
+
+# Function to convert integer to IP
+int_to_ip() {
+    local ip=$1
+    echo "$((ip >> 24 & 255)).$((ip >> 16 & 255)).$((ip >> 8 & 255)).$((ip & 255))"
+}
+
+# Database credentials
+DB_USER="username"
+DB_PASSWORD="password"
+DB_NAME="database_name"
+
+# Loop through each subnet
+for SUBNET in "${SUBNETS[@]}"; do
+    IFS='/' read -r ip range <<< "$SUBNET"
+    ip_start=$(ip_to_int "$ip")
+    ip_end=$((ip_start + 2**(32-range) - 1))
+
+    for ip_int in $(seq "$ip_start" "$ip_end"); do
+        ip=$(int_to_ip "$ip_int")
+        echo "Unbanning IP: $ip"
+
+        # Unban the IP from the database (replace with your actual database command)
+        mysql -u "$DB_USER" -p"$DB_PASSWORD" -e "DELETE FROM ban_ip WHERE ip_address = '$ip';" "$DB_NAME"
+        if [ $? -eq 0 ]; then
+            echo "Successfully unbanned IP: $ip"
+        else
+            echo "Failed to unban IP: $ip"
+        fi
+    done
+done
