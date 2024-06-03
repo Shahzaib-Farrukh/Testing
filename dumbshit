@@ -32,12 +32,12 @@ for SUBNET in "${SUBNETS[@]}"; do
         ip=$(int_to_ip "$ip_int")
         echo "Unbanning IP: $ip"
 
-        # Unban the IP from the database (replace with your actual database command)
-        mysql -u "$DB_USER" -p"$DB_PASSWORD" -e "DELETE FROM ban_ip WHERE ip_address = '$ip';" "$DB_NAME"
+        # Unban the IP from the database using TCP/IP connection
+        mysql -h 127.0.0.1 -u "$DB_USER" -p"$DB_PASSWORD" -e "DELETE FROM ban_ip WHERE ip_address = '$ip';" "$DB_NAME"
         if [ $? -eq 0 ]; then
             echo "Successfully unbanned IP: $ip"
         else
-            echo "Failed to unban IP: $ip"
+            echo "Failed to unbanned IP: $ip"
         fi
     done
 done
