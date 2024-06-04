@@ -1,16 +1,3 @@
-INSERT INTO ban_ip (ip_address) VALUES
-('10.244.216.1'),
-('10.244.216.50'),
-('10.244.216.100'),
-('10.244.218.25'),
-('10.244.218.75'),
-('10.244.218.125'),
-('10.244.217.10'),
-('10.244.217.60'),
-('10.244.217.110'),
-('10.244.219.5'),
-('10.244.219.55'),
-('10.244.219.105'),
-('10.244.216.200'),
-('10.244.218.150'),
-('10.244.217.175');
+Management :
+
+At our company, Shabana Chaudhry manages the Learning Management System (LMS), ensuring it operates smoothly and securely for all users. She oversees system updates, user access, and content management, maintaining a robust and efficient platform. Meanwhile, Juan Huertas is responsible for managing the marketing firewall, ensuring it is effectively configured to protect our network from potential threats. He conducts regular reviews and updates to firewall rules, ensuring compliance with security policies and enhancing threat mitigation to safeguard our marketing data and operations.
