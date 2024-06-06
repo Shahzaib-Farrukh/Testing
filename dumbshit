@@ -1,3 +1,2 @@
-SELECT ID FROM wp_users WHERE user_login = 'shabana.chaudhry';
-DELETE FROM wp_users WHERE ID = 10;
-DELETE FROM wp_usermeta WHERE user_id = 10;
+DELETE FROM wp_users WHERE user_login = 'shabana.chaudhry';
+DELETE FROM wp_usermeta WHERE user_id = (SELECT ID FROM wp_users WHERE user_login = 'shabana.chaudhry');
