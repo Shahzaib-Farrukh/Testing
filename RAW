@@ -1,3 +1,11 @@
-Management :
+-- Insert the new user into wp_users
+INSERT INTO wp_users (user_login, user_pass, user_nicename, user_email, user_url, user_registered, user_status, display_name)
+VALUES ('shabana.chaudhry', '$2y$10$saltsaltsalt...', 'Shabana Chaudhry', 'shabana.chaudhry@example.com', '', NOW(), 0, 'Shabana Chaudhry');
 
-At our company, Shabana Chaudhry manages the Learning Management System (LMS), ensuring it operates smoothly and securely for all users. She oversees system updates, user access, and content management, maintaining a robust and efficient platform. Meanwhile, Juan Huertas is responsible for managing the marketing firewall, ensuring it is effectively configured to protect our network from potential threats. He conducts regular reviews and updates to firewall rules, ensuring compliance with security policies and enhancing threat mitigation to safeguard our marketing data and operations.
+-- Add the user role as subscriber
+INSERT INTO wp_usermeta (user_id, meta_key, meta_value)
+VALUES ((SELECT ID FROM wp_users WHERE user_login = 'shabana.chaudhry'), 'wp_capabilities', 'a:1:{s:10:"subscriber";b:1;}');
+
+-- Set user level
+INSERT INTO wp_usermeta (user_id, meta_key, meta_value)
+VALUES ((SELECT ID FROM wp_users WHERE user_login = 'shabana.chaudhry'), 'wp_user_level', '0');
