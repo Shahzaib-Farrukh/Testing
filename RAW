@@ -11,4 +11,4 @@ INSERT INTO wp_usermeta (user_id, meta_key, meta_value)
 VALUES ((SELECT ID FROM wp_users WHERE user_login = 'shabana.chaudhry'), 'wp_user_level', '0');
 
 $2y$10$XECmqsAYcsztGr4d19JD7.8OzNzjq.umxPdzwdT2tjLDt9TQ8qn2y
-grout%326^&&76
+grout%326&&76
