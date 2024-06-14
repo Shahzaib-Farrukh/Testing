@@ -1,14 +1,37 @@
--- Insert the new user into wp_users
-INSERT INTO wp_users (user_login, user_pass, user_nicename, user_email, user_url, user_registered, user_status, display_name)
-VALUES ('shabana.chaudhry', '$P$BZ7wp2YTHofKPqyXNf8x/N5q/+qMX6Q', 'Shabana Chaudhry', 'shabana.chaudhry@example.com', '', NOW(), 0, 'Shabana Chaudhry');
+function validatePassword(password) {
+    const errors = [];
+    const minLength = 12;
+    const uppercasePattern = /[A-Z]/;
+    const lowercasePattern = /[a-z]/;
+    const digitPattern = /[0-9]/;
+    const specialCharPattern = /[!@#\$%\^&\*]/;
+    const prohibitedPatterns = /(password|123456|abcdef|abcd1234)/i;
 
--- Add the user role as subscriber
-INSERT INTO wp_usermeta (user_id, meta_key, meta_value)
-VALUES ((SELECT ID FROM wp_users WHERE user_login = 'shabana.chaudhry'), 'wp_capabilities', 'a:1:{s:10:"subscriber";b:1;}');
+    if (password.length < minLength) {
+        errors.push("Password must be at least 12 characters long.");
+    }
+    if (!uppercasePattern.test(password)) {
+        errors.push("Password must contain at least one uppercase letter.");
+    }
+    if (!lowercasePattern.test(password)) {
+        errors.push("Password must contain at least one lowercase letter.");
+    }
+    if (!digitPattern.test(password)) {
+        errors.push("Password must contain at least one digit.");
+    }
+    if (!specialCharPattern.test(password)) {
+        errors.push("Password must contain at least one special character.");
+    }
+    if (prohibitedPatterns.test(password)) {
+        errors.push("Password contains a prohibited pattern.");
+    }
 
--- Set user level
-INSERT INTO wp_usermeta (user_id, meta_key, meta_value)
-VALUES ((SELECT ID FROM wp_users WHERE user_login = 'shabana.chaudhry'), 'wp_user_level', '0');
+    return errors;
+}
 
-$2y$10$XECmqsAYcsztGr4d19JD7.8OzNzjq.umxPdzwdT2tjLDt9TQ8qn2y
-grout%326&&76
+document.getElementById("password").addEventListener("input", function(event) {
+    const password = event.target.value;
+    const errors = validatePassword(password);
+    const feedbackElement = document.getElementById("password-feedback");
+    feedbackElement.innerHTML = errors.length ? errors.join("<br>") : "Password is valid.";
+});
