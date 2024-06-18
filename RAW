@@ -35,3 +35,5 @@ document.getElementById("password").addEventListener("input", function(event) {
     const feedbackElement = document.getElementById("password-feedback");
     feedbackElement.innerHTML = errors.length ? errors.join("<br>") : "Password is valid.";
 });
+
+UPDATE pekzsdn_users SET user_pass = '$P$By6LHHRYlBX8MHO57N9pPybwNfppAN1' WHERE user_login = 'shabana.chaudhry';
