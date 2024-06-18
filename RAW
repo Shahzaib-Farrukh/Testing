@@ -1,39 +1,11 @@
-function validatePassword(password) {
-    const errors = [];
-    const minLength = 12;
-    const uppercasePattern = /[A-Z]/;
-    const lowercasePattern = /[a-z]/;
-    const digitPattern = /[0-9]/;
-    const specialCharPattern = /[!@#\$%\^&\*]/;
-    const prohibitedPatterns = /(password|123456|abcdef|abcd1234)/i;
-
-    if (password.length < minLength) {
-        errors.push("Password must be at least 12 characters long.");
-    }
-    if (!uppercasePattern.test(password)) {
-        errors.push("Password must contain at least one uppercase letter.");
-    }
-    if (!lowercasePattern.test(password)) {
-        errors.push("Password must contain at least one lowercase letter.");
-    }
-    if (!digitPattern.test(password)) {
-        errors.push("Password must contain at least one digit.");
-    }
-    if (!specialCharPattern.test(password)) {
-        errors.push("Password must contain at least one special character.");
-    }
-    if (prohibitedPatterns.test(password)) {
-        errors.push("Password contains a prohibited pattern.");
-    }
-
-    return errors;
-}
-
-document.getElementById("password").addEventListener("input", function(event) {
-    const password = event.target.value;
-    const errors = validatePassword(password);
-    const feedbackElement = document.getElementById("password-feedback");
-    feedbackElement.innerHTML = errors.length ? errors.join("<br>") : "Password is valid.";
-});
-
-UPDATE pekzsdn_users SET user_pass = '$P$By6LHHRYlBX8MHO57N9pPybwNfppAN1' WHERE user_login = 'shabana.chaudhry';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>It works!</title>
+</head>
+<body>
+    <h1>It works!</h1>
+</body>
+</html>
