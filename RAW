@@ -1,9 +1,50 @@
-GRANT ALL PRIVILEGES ON *.* TO 'dba_admin'@'174.57.186.179' WITH GRANT OPTION;
-GRANT USAGE ON *.* TO 'dba_admin'@'174.57.186.179';
+Step 1) 
+ 
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" 
 
+Sudo apt install unzip 
 
-CREATE USER 'new_username'@'174.57.186.179' IDENTIFIED BY 'your_password';
-GRANT ALL PRIVILEGES ON *.* TO 'new_username'@'174.57.186.179' WITH GRANT OPTION;
-FLUSH PRIVILEGES;
+unzip awscliv2.zip			~ Unzip the AWS CLI 
 
-GRANT ALL PRIVILEGES ON *.* TO 'shabana'@'174.57.186.179' IDENTIFIED BY 'grout9090' WITH GRANT OPTION;
+sudo ./aws/install			~ Install AWS 
+
+Aws –version 				~ Check the version 
+ 
+Step 2) 
+ 
+aws configure				~ This will configure your aws cli 
+
+AWS Access Key ID:  
+
+AWS Secret Access Key ID:  
+
+Default region name: eu-west-1 
+
+Default output format: json 
+
+ 
+
+Step 3) 
+ 
+Check for your system's architecture. 
+ 
+uname –m				~ This will show you your system's architecture. 
+
+ 
+X86_64: 
+curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_64bit/session-manager-plugin.deb" -o "session-manager-plugin.deb" 
+ 
+X86: 
+
+curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_32bit/session-manager-plugin.deb" -o "session-manager-plugin.deb" 
+
+ 
+
+AMR64: 
+curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_arm64/session-manager-plugin.deb" -o "session-manager-plugin.deb" 
+
+ 
+
+Run the command: 
+
+sudo dpkg -i session-manager-plugin.deb 
