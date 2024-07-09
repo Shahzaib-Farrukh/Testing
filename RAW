@@ -1,6 +1,14 @@
-SELECT User, Host, Grant_priv
-FROM mysql.user
-WHERE User = 'dba_admin' AND Host = '192.168.1.100';
-
-CREATE USER 'new_user'@'localhost' IDENTIFIED BY 'password';
-GRANT ALL PRIVILEGES ON sales.* TO 'salesadmin'@'localhost';
+enable mfa
+iam roles with strict permissions
+strong password policy
+cloudtrail to log - track aws account activity
+enable aws guardduty
+rotate access keys
+----------------------------------------------------------------------------------------
+network acl
+security groups
+patching
+monitoring and logging
+daily backups
+disable root access and use sudo to perform admin tasks
+IMDSv2
