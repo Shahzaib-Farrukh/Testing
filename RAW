@@ -12,3 +12,19 @@ monitoring and logging
 daily backups
 disable root access and use sudo to perform admin tasks
 IMDSv2
+----------------------------------------------------------------------------------------
+Change the Default Port
+Have you changed the default SSH port from 22 to another port in the SSH configuration file?
+Have you updated your firewall rules to allow the new SSH port?
+Use Key-Based Authentication
+Have you disabled password authentication in the SSH configuration file?
+Have you set up SSH key-based authentication for all users?
+Limit User Access
+Have you specified which users are allowed to connect via SSH in the SSH configuration file?
+Enable Firewall
+Have you configured your firewall to allow traffic only on the specified SSH port?
+Is your firewall enabled and active?
+Install Fail2Ban - Brute Force
+Have you installed and configured Fail2Ban to protect against brute force attacks on SSH?
+Disable Root Login
+Have you disabled direct root login via SSH in the SSH configuration file?
