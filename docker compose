@@ -23,3 +23,13 @@ services:
 volumes:
   moodledata:
   dbdata:
+
+
+<VirtualHost *:80>
+    DocumentRoot /var/www/html/moodle
+    <Directory /var/www/html/moodle>
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
+</VirtualHost>
