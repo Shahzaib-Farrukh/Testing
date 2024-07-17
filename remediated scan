@@ -1,21 +1,52 @@
-import re
-
-def validate_password(password):
-    if len(password) < 12:
-        return False, "Password must be at least 12 characters long."
-    if not re.search(r"[A-Z]", password):
-        return False, "Password must contain at least one uppercase letter."
-    if not re.search(r"[a-z]", password):
-        return False, "Password must contain at least one lowercase letter."
-    if not re.search(r"[0-9]", password):
-        return False, "Password must contain at least one digit."
-    if not re.search(r"[!@#\$%\^&\*\(\)_\+\-=\[\]\{\};:'\",<>\./\?\\|`~]", password):
-        return False, "Password must contain at least one special character."
-    if re.search(r"(password|123456|abcdef|abcd1234)", password, re.IGNORECASE):
-        return False, "Password contains a prohibited pattern."
-    return True, "Password is valid."
-
-# Example usage
-password = "A_valid1@Password!"
-is_valid, message = validate_password(password)
-print(message)
+@ 300 IN A 52.51.131.59
+@ 300 IN A 34.246.144.185
+@ 300 IN A 63.35.23.131
+@ 300 IN MX 10 mxa-000e6001.gslb.pphosted.com
+@ 300 IN MX 10 mxb-000e6001.gslb.pphosted.com
+@ 300 IN NS dns-amer-1.ptns.pearson.com
+@ 300 IN NS dns-amer-2.ptns.pearson.com
+@ 300 IN NS dns-emea-1.ptns.pearson.com
+@ 300 IN NS dns-emea-2.ptns.pearson.com
+@ 300 IN NS dns-apac-1.ptns.pearson.com
+@ 300 IN NS dns-apac-2.ptns.pearson.com
+@ 300 IN SOA dns-apac-1.ptns.pearson.com gns-dnsoperations@pearson.com 2023041215 900 900 2592000 900
+@ 300 IN TXT v=spf1 ip4:208.96.6.128/27 ip4:208.96.32.0/26 ip4:208.65.182.32/28 ip4:66.47.25.96/29 ip4:64.62.62.224/29 include:spf.protection.outlook.com include:spf.pearson.com -all
+@ 300 IN TXT MS=ms83863909
+_15c4dd036255282ca587996f347c682d.lmscontentdev 300 IN CNAME _731e1a056dafead5e987ca9eb51197c3.sdgjtdhdhz.acm-validations.aws
+_1748e3daa22400184d7108d3130e4433 300 IN CNAME 39d9dc52955954ad7245252f99efc94c.dff5e5ee222858cca7c51f22401ef43c.sectigo.com
+_4515c732cedb9625cc6458b2023446af.lmscontent 300 IN CNAME _acb145f13dc9f7fe91fd2eb56a74918c.sdgjtdhdhz.acm-validations.aws
+_dmarc 300 IN TXT v=DMARC1; p=none; fo=1; rua=mailto:dmarc_rua@embanet.com;ruf=mailto:dmarc_ruf@embanet.com
+acedistance 300 IN CNAME moodl-prod2-ogabk8w559mg-1068455401.ca-central-1.elb.amazonaws.com
+application 300 IN A 159.182.7.43
+apportal 300 IN A 159.182.7.42
+autodiscover 300 IN CNAME autodiscover.outlook.com
+awscscprod 300 IN A 52.60.62.110
+awscscprod 300 IN A 99.79.89.155
+awsolbbprod 300 IN A 99.79.96.11
+awsolbbprod 300 IN A 99.79.2.218
+awsolbbprod.embanet.com 300 IN CNAME black-weblo-jlarsep6o1e9-240075962.ca-central-1.elb.amazonaws.com.embanet.com
+bbol 300 IN CNAME black-weblo-jlarsep6o1e9-240075962.ca-central-1.elb.amazonaws.com
+devacedistance 300 IN CNAME moodl-dev1w-r1uavdrdn9yf-1997686372.ca-central-1.elb.amazonaws.com
+dot 300 IN A 159.182.6.55
+ekgcasi 300 IN A 159.182.7.43
+ekgleads 300 IN A 159.182.7.41
+email.mdldev 300 IN CNAME mailgun.org
+icdapplication 300 IN A 159.182.7.43
+icdapportal 300 IN A 159.182.7.42
+icdekgcasi 300 IN A 159.182.7.43
+icdekgleads 300 IN A 159.182.7.41
+icdextranetap 300 IN A 159.182.7.42
+leadstest 300 IN A 159.182.217.35
+lmscontent 300 IN CNAME prd-lmscontent.polsprd.com
+lmscontentdev 300 IN CNAME dev-lmscontent.polsdev.com
+moodleonline 300 IN A 159.182.7.35
+nec 300 IN A 159.182.4.98
+olbbtest 300 IN CNAME black-weblo-1ek0q7bn1dwg1-1200935720.ca-central-1.elb.amazonaws.com
+selector1._domainkey 300 IN CNAME selector1-embanet-com._domainkey.pearsononline.onmicrosoft.com
+selector2._domainkey 300 IN CNAME selector2-embanet-com._domainkey.pearsononline.onmicrosoft.com
+smtp._domainkey.mdldev 300 IN TXT k=rsa;p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCeA1cXnaa872tY2/tiw8eNTMXFA2NhpD2clMQydkjMkC2P9pKo0Phq0wlqZ5lT1EGv4C+Z2TEdGLk3WEyASt9nwW75wLzjdk70U7gNN0PYQHsj5jFwPCnCaNsRQeKtJpj3RY1kthYG3qmEz4E13pLUrz7P+Q7wwcETcAp3H9P4pQIDAQAB
+solutions 300 IN CNAME moodl-prod4-1v6fcdb3p0m31-1172811388.ca-central-1.elb.amazonaws.com
+spf 300 IN A 159.182.31.51
+supportcenter 300 IN A 159.182.7.47
+toolkit 300 IN A 159.182.7.48
+www 300 IN CNAME embanet.com
