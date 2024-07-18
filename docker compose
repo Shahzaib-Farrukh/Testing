@@ -1,35 +1,35 @@
-version: '3.7'
+version: '3.8'
 
 services:
-  moodle:
-    build: .
+  web:
+    image: php:8.2-apache
+    container_name: moodle-web
     ports:
       - "8080:80"
     volumes:
-      - moodledata:/var/www/html/moodledata
-    depends_on:
-      - db
+      - ./moodle:/var/www/html
+      - ./config.php:/var/www/html/config.php
+    networks:
+      - moodle-net
+    environment:
+      - MOODLE_DOCKER_WWWROOT=/var/www/html
 
   db:
     image: mysql:5.7
+    container_name: moodle-db
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root_password
       MYSQL_DATABASE: moodle
       MYSQL_USER: moodleuser
-      MYSQL_PASSWORD: moodle_password
-    volumes:
-      - dbdata:/var/lib/mysql
+      MYSQL_PASSWORD: moodlepassword
+    networks:
+      - moodle-net
 
 volumes:
-  moodledata:
-  dbdata:
-
-
-<VirtualHost *:80>
-    DocumentRoot /var/www/html/moodle
-    <Directory /var/www/html/moodle>
-        Options Indexes FollowSymLinks
-        AllowOverride All
-        Require all granted
-    </Directory>
-</VirtualHost>
+  db_data:
+networks:
+  moodle-net:
+    driver: bridge
