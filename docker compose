@@ -1,35 +1,31 @@
 version: '3.8'
 
 services:
-  web:
-    build: .
-    container_name: moodle-web
+  moodle-db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: moodle
+      MYSQL_USER: moodle
+      MYSQL_PASSWORD: moodle
+    volumes:
+      - moodledata:/var/lib/mysql
+
+  moodle-web:
+    image: moodle:latest
     ports:
       - "8080:80"
+    environment:
+      MOODLE_DATABASE_TYPE: mysqli
+      MOODLE_DATABASE_HOST: moodle-db
+      MOODLE_DATABASE_NAME: moodle
+      MOODLE_DATABASE_USER: moodle
+      MOODLE_DATABASE_PASSWORD: moodle
     volumes:
       - ./moodle:/var/www/html
       - ./config.php:/var/www/html/config.php
-    networks:
-      - moodle-net
-    environment:
-      - MOODLE_DOCKER_WWWROOT=/var/www/html
-
-  db:
-    image: mysql:5.7
-    container_name: moodle-db
-    volumes:
-      - db_data:/var/lib/mysql
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: root_password
-      MYSQL_DATABASE: moodle
-      MYSQL_USER: moodleuser
-      MYSQL_PASSWORD: moodlepassword
-    networks:
-      - moodle-net
+    depends_on:
+      - moodle-db
 
 volumes:
-  db_data:
-networks:
-  moodle-net:
-    driver: bridge
+  moodledata:
