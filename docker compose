@@ -12,7 +12,7 @@ services:
       - moodledata:/var/lib/mysql
 
   moodle-web:
-    image: moodle:latest
+    build: .
     ports:
       - "8080:80"
     environment:
@@ -21,9 +21,6 @@ services:
       MOODLE_DATABASE_NAME: moodle
       MOODLE_DATABASE_USER: moodle
       MOODLE_DATABASE_PASSWORD: moodle
-    volumes:
-      - ./moodle:/var/www/html
-      - ./config.php:/var/www/html/config.php
     depends_on:
       - moodle-db
 
