@@ -1,13 +1,10 @@
-# Use the Amazon Linux 2 image as a base
+# Use Amazon Linux 2 as the base image
 FROM amazonlinux:2
 
-# Enable PHP 8.2 and install the necessary packages
-RUN amazon-linux-extras enable php8.2 \
-    && yum -y --setopt=tsflags=nodocs update \
-    && yum -y install \
-    libnghttp2 \
+# Install dependencies and PHP extensions
+RUN yum update -y && \
+    yum install -y \
     httpd \
-    mod_ssl \
     tar \
     hostname \
     php \
@@ -37,25 +34,24 @@ RUN amazon-linux-extras enable php8.2 \
     unzip \
     logrotate \
     vim \
-    procps \
+    procps-ng \
     postfix \
     cyrus-sasl-plain \
-    mailx \
-    && yum clean all
+    mailx && \
+    yum clean all && \
+    rm -rf /var/cache/yum
 
-# Enable Apache mod_rewrite
-RUN echo "LoadModule rewrite_module modules/mod_rewrite.so" >> /etc/httpd/conf/httpd.conf
-
-# Set the document root directory
+# Set the document root
 WORKDIR /var/www/html
 
-# Copy the current directory contents into the container at /var/www/html
+# Copy your application files to the container
 COPY . /var/www/html
 
 # Set the correct permissions
-RUN chown -R apache:apache /var/www/html
+RUN chown -R apache:apache /var/www/html && \
+    chmod -R 755 /var/www/html
 
-# Expose port 80
+# Expose the HTTP port
 EXPOSE 80
 
 # Start Apache server
