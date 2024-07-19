@@ -41,15 +41,25 @@ RUN yum update -y && \
     yum clean all && \
     rm -rf /var/cache/yum
 
+# Enable mod_php
+RUN echo "LoadModule php7_module modules/libphp7.so" >> /etc/httpd/conf/httpd.conf && \
+    echo "AddType application/x-httpd-php .php" >> /etc/httpd/conf/httpd.conf
+
 # Set the document root
 WORKDIR /var/www/html
 
 # Copy your Moodle files to the container
-COPY . /var/www/html
+COPY moodle /var/www/html
+
+# Remove the default Apache test page
+RUN rm -f /etc/httpd/conf.d/welcome.conf
 
 # Set the correct permissions
 RUN chown -R apache:apache /var/www/html && \
-    chmod -R 755 /var/www/html
+    chmod -R 755 /var/www/html && \
+    mkdir -p /var/www/moodledata && \
+    chown -R apache:apache /var/www/moodledata && \
+    chmod -R 777 /var/www/moodledata
 
 # Expose the HTTP port
 EXPOSE 80
