@@ -3,9 +3,10 @@ unset($CFG);
 global $CFG;
 $CFG = new stdClass();
 
+// Database configuration
 $CFG->dbtype    = 'mysqli';
 $CFG->dblibrary = 'native';
-$CFG->dbhost    = 'moodle-db';
+$CFG->dbhost    = 'db';
 $CFG->dbname    = 'moodle';
 $CFG->dbuser    = 'moodle';
 $CFG->dbpass    = 'moodle';
@@ -17,10 +18,11 @@ $CFG->dboptions = array (
   'dbcollation' => 'utf8mb4_unicode_ci',
 );
 
+// Web and data directory configuration
 $CFG->wwwroot   = 'http://localhost:8080';
 $CFG->dataroot  = '/var/www/moodledata';
 $CFG->admin     = 'admin';
 
-$CFG->directorypermissions = 0777;
+$CFG->directorypermissions = 02770;
 
 require_once(__DIR__ . '/lib/setup.php');
