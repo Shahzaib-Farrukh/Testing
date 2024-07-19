@@ -44,7 +44,7 @@ RUN yum update -y && \
 # Set the document root
 WORKDIR /var/www/html
 
-# Copy your application files to the container
+# Copy your Moodle files to the container
 COPY . /var/www/html
 
 # Set the correct permissions
