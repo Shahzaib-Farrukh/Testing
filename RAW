@@ -1,30 +1,35 @@
-enable mfa
-iam roles with strict permissions
-strong password policy
-cloudtrail to log - track aws account activity
-enable aws guardduty
-rotate access keys
-----------------------------------------------------------------------------------------
-network acl
-security groups
-patching
-monitoring and logging
-daily backups
-disable root access and use sudo to perform admin tasks
-IMDSv2
-----------------------------------------------------------------------------------------
-Change the Default Port
-Have you changed the default SSH port from 22 to another port in the SSH configuration file?
-Have you updated your firewall rules to allow the new SSH port?
-Use Key-Based Authentication
-Have you disabled password authentication in the SSH configuration file?
-Have you set up SSH key-based authentication for all users?
-Limit User Access
-Have you specified which users are allowed to connect via SSH in the SSH configuration file?
-Enable Firewall
-Have you configured your firewall to allow traffic only on the specified SSH port?
-Is your firewall enabled and active?
-Install Fail2Ban - Brute Force
-Have you installed and configured Fail2Ban to protect against brute force attacks on SSH?
-Disable Root Login
-Have you disabled direct root login via SSH in the SSH configuration file?
+<?php
+// Specify the directory
+$directory = 'path/to/your/directory';
+
+// Check if the directory exists
+if (is_dir($directory)) {
+    // Scan the directory and get an array of files and directories
+    $files = scandir($directory);
+
+    // Display the contents of the directory
+    echo "Contents of the directory '$directory':<br>";
+    foreach ($files as $file) {
+        if ($file != '.' && $file != '..') {
+            echo $file . "<br>";
+        }
+    }
+} else {
+    echo "The specified directory does not exist.";
+}
+
+// Specify the file path
+$file_path = 'path/to/your/file.txt';
+
+// Check if the file exists
+if (file_exists($file_path)) {
+    // Get the contents of the file
+    $file_contents = file_get_contents($file_path);
+
+    // Display the contents of the file
+    echo "<br>Contents of the file '$file_path':<br>";
+    echo nl2br($file_contents);
+} else {
+    echo "<br>The specified file does not exist.";
+}
+?>
