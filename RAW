@@ -1,35 +1,100 @@
-<?php
-// Specify the directory
-$directory = 'path/to/your/directory';
+Integrating Qualys with Jira can streamline vulnerability management and ticketing by automatically creating Jira issues for detected vulnerabilities. Here are the steps to integrate Qualys with Jira:
 
-// Check if the directory exists
-if (is_dir($directory)) {
-    // Scan the directory and get an array of files and directories
-    $files = scandir($directory);
+Prerequisites
+Access to both Qualys and Jira with appropriate permissions.
+Qualys API access enabled.
+Jira API token (for Jira Cloud) or username/password (for Jira Server).
+Steps to Integrate Qualys with Jira
+Set Up Qualys API Access:
 
-    // Display the contents of the directory
-    echo "Contents of the directory '$directory':<br>";
-    foreach ($files as $file) {
-        if ($file != '.' && $file != '..') {
-            echo $file . "<br>";
+Log in to your Qualys account.
+Navigate to the Users section.
+Create or modify a user to enable API access.
+Note down the API username and password.
+Generate Jira API Token (for Jira Cloud):
+
+Log in to your Jira Cloud account.
+Go to Account settings > Security.
+Generate an API token and note it down.
+Prepare a Script or Use Middleware:
+
+You can write a script to pull vulnerabilities from Qualys and create Jira issues. Alternatively, use middleware like Zapier or custom automation tools.
+Using a Script (Example in Python)
+Install Required Libraries
+bash
+Copy code
+pip install requests
+Example Python Script
+python
+Copy code
+import requests
+from requests.auth import HTTPBasicAuth
+
+# Qualys API credentials
+qualys_api_url = "https://qualysapi.qualys.com/api/2.0/fo/asset/host/vm/detection/"
+qualys_username = "your_qualys_username"
+qualys_password = "your_qualys_password"
+
+# Jira API credentials
+jira_api_url = "https://your_jira_instance.atlassian.net/rest/api/3/issue/"
+jira_username = "your_jira_email"
+jira_api_token = "your_jira_api_token"
+
+# Fetch vulnerabilities from Qualys
+response = requests.get(
+    qualys_api_url,
+    auth=HTTPBasicAuth(qualys_username, qualys_password),
+    params={
+        "action": "list",
+        "output_format": "json",
+    }
+)
+
+vulnerabilities = response.json()["HOST_LIST_VM_DETECTION_OUTPUT"]["RESPONSE"]["HOST_LIST"]
+
+# Create Jira issues for each vulnerability
+for vulnerability in vulnerabilities:
+    issue_data = {
+        "fields": {
+            "project": {
+                "key": "YOUR_PROJECT_KEY"
+            },
+            "summary": f"Vulnerability: {vulnerability['QID']}",
+            "description": f"Detected on host: {vulnerability['IP']} - {vulnerability['DNS']}",
+            "issuetype": {
+                "name": "Bug"
+            }
         }
     }
-} else {
-    echo "The specified directory does not exist.";
-}
+    
+    response = requests.post(
+        jira_api_url,
+        json=issue_data,
+        auth=HTTPBasicAuth(jira_username, jira_api_token)
+    )
+    
+    if response.status_code == 201:
+        print(f"Created Jira issue for vulnerability {vulnerability['QID']}")
+    else:
+        print(f"Failed to create Jira issue: {response.content}")
 
-// Specify the file path
-$file_path = 'path/to/your/file.txt';
+print("Integration complete.")
+Using Middleware (Zapier Example)
+Create a Zap:
 
-// Check if the file exists
-if (file_exists($file_path)) {
-    // Get the contents of the file
-    $file_contents = file_get_contents($file_path);
+Trigger: Qualys detects a new vulnerability.
+Action: Create a new issue in Jira.
+Configure the Trigger:
 
-    // Display the contents of the file
-    echo "<br>Contents of the file '$file_path':<br>";
-    echo nl2br($file_contents);
-} else {
-    echo "<br>The specified file does not exist.";
-}
-?>
+Use the Qualys API to monitor for new vulnerabilities.
+Configure the Action:
+
+Use the Jira API to create a new issue with details from the Qualys trigger.
+Test the Integration:
+
+Ensure the trigger correctly detects new vulnerabilities and that Jira issues are created as expected.
+Best Practices
+Regular Monitoring: Ensure the script or middleware runs regularly to keep Jira updated.
+Error Handling: Implement error handling in the script to manage API failures or data inconsistencies.
+Security: Keep API credentials secure and rotate them periodically.
+Integrating Qualys with Jira can greatly enhance your vulnerability management workflow by providing a seamless way to track and resolve security issues.
