@@ -1,37 +1,8 @@
-Integrating Qualys with Jira can streamline vulnerability management and ticketing by automatically creating Jira issues for detected vulnerabilities. Here are the steps to integrate Qualys with Jira:
-
-Prerequisites
-Access to both Qualys and Jira with appropriate permissions.
-Qualys API access enabled.
-Jira API token (for Jira Cloud) or username/password (for Jira Server).
-Steps to Integrate Qualys with Jira
-Set Up Qualys API Access:
-
-Log in to your Qualys account.
-Navigate to the Users section.
-Create or modify a user to enable API access.
-Note down the API username and password.
-Generate Jira API Token (for Jira Cloud):
-
-Log in to your Jira Cloud account.
-Go to Account settings > Security.
-Generate an API token and note it down.
-Prepare a Script or Use Middleware:
-
-You can write a script to pull vulnerabilities from Qualys and create Jira issues. Alternatively, use middleware like Zapier or custom automation tools.
-Using a Script (Example in Python)
-Install Required Libraries
-bash
-Copy code
-pip install requests
-Example Python Script
-python
-Copy code
 import requests
 from requests.auth import HTTPBasicAuth
 
 # Qualys API credentials
-qualys_api_url = "https://qualysapi.qualys.com/api/2.0/fo/asset/host/vm/detection/"
+qualys_api_url = "https://<your_qualys_api_base_url>/api/2.0/fo/asset/host/vm/detection/"
 qualys_username = "your_qualys_username"
 qualys_password = "your_qualys_password"
 
@@ -50,7 +21,22 @@ response = requests.get(
     }
 )
 
-vulnerabilities = response.json()["HOST_LIST_VM_DETECTION_OUTPUT"]["RESPONSE"]["HOST_LIST"]
+# Print the response status code and content for debugging
+print(f"Response Status Code: {response.status_code}")
+print("Qualys API response content:")
+print(response.content)
+
+# Check if the response is empty or not in JSON format
+if response.status_code == 200:
+    try:
+        response_json = response.json()
+        vulnerabilities = response_json.get("HOST_LIST_VM_DETECTION_OUTPUT", {}).get("RESPONSE", {}).get("HOST_LIST", [])
+    except ValueError as e:
+        print("Failed to decode JSON response:", e)
+        vulnerabilities = []
+else:
+    print("Failed to fetch data from Qualys API")
+    vulnerabilities = []
 
 # Create Jira issues for each vulnerability
 for vulnerability in vulnerabilities:
@@ -79,22 +65,3 @@ for vulnerability in vulnerabilities:
         print(f"Failed to create Jira issue: {response.content}")
 
 print("Integration complete.")
-Using Middleware (Zapier Example)
-Create a Zap:
-
-Trigger: Qualys detects a new vulnerability.
-Action: Create a new issue in Jira.
-Configure the Trigger:
-
-Use the Qualys API to monitor for new vulnerabilities.
-Configure the Action:
-
-Use the Jira API to create a new issue with details from the Qualys trigger.
-Test the Integration:
-
-Ensure the trigger correctly detects new vulnerabilities and that Jira issues are created as expected.
-Best Practices
-Regular Monitoring: Ensure the script or middleware runs regularly to keep Jira updated.
-Error Handling: Implement error handling in the script to manage API failures or data inconsistencies.
-Security: Keep API credentials secure and rotate them periodically.
-Integrating Qualys with Jira can greatly enhance your vulnerability management workflow by providing a seamless way to track and resolve security issues.
