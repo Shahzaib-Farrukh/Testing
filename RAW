@@ -9,6 +9,9 @@ headers = {
     'X-Requested-With': 'Python requests',
     'Content-Type': 'application/json',
     'Authorization': 'Basic <base64_encoded_credentials>',
+}
+response = requests.get(url, headers=headers)
+print(response.json())
 # Jira API credentials
 jira_api_url = "https://your_jira_instance.atlassian.net/rest/api/3/issue/"
 jira_username = "your_jira_email"
