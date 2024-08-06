@@ -1,2 +1,18 @@
-SELECT * FROM config WHERE name LIKE '%module_name%';
-SELECT * FROM key_value WHERE collection = 'system.module' AND name = 'module_name';
+telnet smtp.office365.com 587
+Trying 52.98.242.210...
+Connected to smtp.office365.com.
+Escape character is '^]'.
+220 DUZP191CA0052.outlook.office365.com Microsoft ESMTP MAIL Service ready at Tue, 6 Aug 2024 16:12:48 +0000
+ehlo sussex.ac.uk
+250-DUZP191CA0052.outlook.office365.com Hello [52.215.3.176]
+250-SIZE 157286400
+250-PIPELINING
+250-DSN
+250-ENHANCEDSTATUSCODES
+250-STARTTLS
+250-8BITMIME
+250-BINARYMIME
+250-CHUNKING
+250 SMTPUTF8
+STARTTLS
+220 2.0.0 Ready to start TLS
