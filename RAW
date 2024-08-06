@@ -16,3 +16,12 @@ ehlo sussex.ac.uk
 250 SMTPUTF8
 STARTTLS
 220 2.0.0 Ready to start TLS
+
+openssl s_client -starttls smtp -connect smtp.office365.com:587
+
+EHLO sussex.ac.uk
+AUTH LOGIN
+# Provide base64-encoded username and password
+
+echo -n "your-email@example.com" | base64
+echo -n "your-password" | base64
