@@ -1,4 +1,4 @@
-aws ssm send-command \
-  --document-name "AWS-RunShellScript" \
-  --targets "Key=instanceids,Values=<instance-id>" \
-  --parameters 'commands=["sudo systemctl restart amazon-ssm-agent"]'
+ALTER TABLE mdl_scorm_scoes_value CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+ALTER TABLE mdl_scorm_scoes_track CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+ALTER TABLE mdl_scorm_element CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+ALTER TABLE mdl_scorm_attempt CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
