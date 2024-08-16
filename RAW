@@ -1,6 +1,5 @@
 IMAGE_REPO_NAME="your-repository-name"
 EXISTING_IMAGE_TAG="1.0.1-release-mdl_core_43"
-NEW_IMAGE_TAG="1.0.1-feature-bl_mdl_core_43"
 
 MANIFEST=$(aws ecr batch-get-image \
     --repository-name $IMAGE_REPO_NAME \
@@ -8,3 +7,14 @@ MANIFEST=$(aws ecr batch-get-image \
     --query 'images[].imageManifest' \
     --output text \
     --region us-east-1)
+
+NEW_IMAGE_TAG="1.0.1-feature-bl_mdl_core_43"
+
+aws ecr put-image \
+    --repository-name $IMAGE_REPO_NAME \
+    --image-tag $NEW_IMAGE_TAG \
+    --image-manifest "$MANIFEST" \
+    --region us-east-1
+
+
+aws ecr describe-images --repository-name $IMAGE_REPO_NAME --region us-east-1
