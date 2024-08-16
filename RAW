@@ -1,4 +1,10 @@
-ALTER TABLE mdl_scorm_scoes_value CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-ALTER TABLE mdl_scorm_scoes_track CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-ALTER TABLE mdl_scorm_element CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-ALTER TABLE mdl_scorm_attempt CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+IMAGE_REPO_NAME="your-repository-name"
+EXISTING_IMAGE_TAG="1.0.1-release-mdl_core_43"
+NEW_IMAGE_TAG="1.0.1-feature-bl_mdl_core_43"
+
+MANIFEST=$(aws ecr batch-get-image \
+    --repository-name $IMAGE_REPO_NAME \
+    --image-ids imageTag=$EXISTING_IMAGE_TAG \
+    --query 'images[].imageManifest' \
+    --output text \
+    --region us-east-1)
