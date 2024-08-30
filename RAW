@@ -1,55 +1,41 @@
-For every mkt site do this when they are good.
+Use IAM roles to give your EC2 instances access to AWS resources
 
-Create AMI (Amazon Machine Image)
-Create EBS Snapshots
-Automate Backups Using AWS Backup
+IAM roles allow you to give your EC2 instances access to AWS resources without having to embed your AWS credentials in your application code. IAM roles are more secure than using access keys because they allow you to control exactly what permissions your EC2 instances have.
 
-Apply the below for the above
-Use Tags and Naming Conventions 
-Monitor Backup Health (use cloud Watch)
+2. Configure security groups to control traffic to your EC2 instances
 
-1. Backup Task Definitions
-Steps:
-Export Task Definition: Go to the ECS console, navigate to your task definition, and choose the latest version.
-Click Actions > View JSON.
-Save the JSON file locally or in a version control system (e.g., Git).
+Security groups act as a firewall for your EC2 instances, controlling traffic both to and from your instances. By default, all traffic is denied and you must explicitly allow traffic that you want to allow.
 
-2. Backup Container Images
-Steps:
-Ensure your Docker images are stored in a reliable container registry like Amazon ECR or Docker Hub.
-Tag your images with a version number or commit hash before pushing them.
-Pull and Push Commands:
-docker pull <image>:<tag>
-docker tag <image>:<tag> <repository>/<image>:<backup-tag>
-docker push <repository>/<image>:<backup-tag>
+When configuring security groups, you should only allow the traffic that your application needs. For example, if your application only needs to communicate with other instances in your VPC, you should only allow traffic from those instances.
 
-3. Backup ECS Service Configuration
-Steps:
-Go to the ECS console and select the cluster.
-Choose the service you want to back up.
-Document or export service configuration details like load balancers, desired count, and deployment settings.
+3. Use key pairs to encrypt traffic to and from your EC2 instances
 
-4. Backup Cluster Configuration
-Steps:
-Document your ECS cluster configuration, including cluster name, instance type, auto-scaling policies, and network settings.
-If using EC2 launch type, ensure your EC2 instances are backed up with AMIs or snapshots.
+Key pairs allow you to encrypt traffic to and from your EC2 instances. By using a key pair, you can ensure that only authorized users can access your instances.
 
-5. Backup Environment Variables and Secrets
-Steps:
-List all environment variables used in your task definitions.
-Backup secrets stored in AWS Secrets Manager or Parameter Store by exporting them to a secure location.
+4. Use Amazon EBS encryption to encrypt data at rest
 
-6. Automate Backups Using Infrastructure as Code (IaC)
-Steps:
-Use tools like AWS CloudFormation or Terraform to define your ECS infrastructure.
-Store IaC templates in a version control system for automated backups and easy recovery.
+Amazon EBS encryption encrypts data at rest, ensuring that it is protected even if the underlying storage is compromised. Amazon EBS encryption is transparent to your applications and requires no changes to your application code.
 
-7. Test Backup Integrity
-Steps:
-Deploy a test environment using your backed-up task definitions, container images, and service configurations.
-Verify that the deployment works as expected and matches the original setup.
+5. Use Amazon S3 encryption to encrypt data in transit
 
-8. Monitor and Audit Backups
-Steps:
-Set up CloudWatch or AWS Config to monitor changes in ECS configurations.
-Regularly review and audit your backup processes to ensure they are up to date and effective.
+Amazon S3 encryption encrypts data in transit, ensuring that it is protected as it travels between your EC2 instance and Amazon S3. Amazon S3 encryption is transparent to your applications and requires no changes to your application code.
+
+6. Use Amazon CloudWatch to monitor activity in your AWS account
+
+Amazon CloudWatch allows you to monitor activity in your AWS account, including activity on your EC2 instances. With Amazon CloudWatch, you can set up alarms that will notify you if there is unusual activity in your account.
+
+7. Use AWS CloudTrail to log activity in your AWS account
+
+AWS CloudTrail is a service that logs all activity in your AWS account. With AWS CloudTrail, you can see who made changes to your AWS resources, when they made those changes, and what those changes were.
+
+8. Use Amazon Inspector to assess the security of your EC2 instances
+
+Amazon Inspector is a security assessment service that can help you identify vulnerabilities in your EC2 instances. Amazon Inspector assesses your EC2 instances for compliance with security best practices and provides you with a report of findings.
+
+9. Use AWS Config to track changes to your AWS resources
+
+AWS Config is a service that allows you to track changes to your AWS resources. With AWS Config, you can see who made changes to your resources, when those changes were made, and what those changes were.
+
+10. Use AWS Trusted Advisor to check for potential security issues
+
+AWS Trusted Advisor is a service that checks for potential security issues in your AWS account. AWS Trusted Advisor can help you identify areas of your account that may need additional security.
