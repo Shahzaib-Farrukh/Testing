@@ -1,40 +1,55 @@
-1. Identity and Access Management (IAM):
-Principle of Least Privilege: Only provide the minimum necessary permissions to users, roles, and services.
-Multi-Factor Authentication (MFA): Enable MFA for all accounts, especially root accounts.
-IAM Policies: Use managed policies and roles over inline policies. Avoid using root account for daily tasks.
-Role-based Access: Use IAM roles for applications that need access to AWS resources, not hardcoded credentials.
-2. Data Protection:
-Encryption: Encrypt sensitive data both in transit (using TLS/SSL) and at rest (use AWS KMS for encryption).
-Backup and Disaster Recovery: Implement regular automated backups with snapshots of your EC2 instances, databases, and storage volumes. Use services like AWS Backup or S3 versioning.
-S3 Bucket Security: Ensure S3 buckets are private by default, use bucket policies and block public access settings, and enable server-side encryption.
-3. Network Security:
-VPC Segmentation: Use Virtual Private Clouds (VPC) with proper network segmentation and isolation for security-sensitive resources.
-Security Groups and NACLs: Use security groups and Network Access Control Lists (NACLs) to control inbound and outbound traffic, only allowing necessary protocols and ports.
-VPN and Direct Connect: Use VPN or AWS Direct Connect for secure connections to on-premise environments.
-Private Subnets: Place sensitive resources, such as databases and application servers, in private subnets with no direct internet access.
-4. Monitoring and Logging:
-AWS CloudTrail: Enable CloudTrail across all accounts for auditing and tracking API calls and actions.
-AWS CloudWatch: Set up CloudWatch to monitor infrastructure, set alarms, and respond to changes in utilization, performance, and security.
-GuardDuty: Enable GuardDuty for intelligent threat detection, and monitor findings for potential security risks.
-VPC Flow Logs: Capture and monitor VPC flow logs to analyze traffic patterns and detect any anomalies.
-5. Incident Response:
-Automated Responses: Set up automated incident responses using AWS Config, CloudWatch Events, and Lambda for remediation tasks.
-Playbooks: Develop incident response playbooks for specific threats, such as DDoS attacks or compromised credentials, using AWS services like AWS Shield for DDoS protection.
-Simulations: Test incident response plans regularly using simulated attacks to ensure preparedness.
-6. Compliance and Governance:
-AWS Config: Use AWS Config to track changes to resources and ensure compliance with security policies.
-Security Hub: Utilize AWS Security Hub to centralize security alerts and compliance checks across all your AWS accounts.
-Encryption Compliance: Ensure compliance with industry standards and regulations (e.g., GDPR, HIPAA) by using encryption mechanisms and maintaining audit logs.
-7. Patch Management:
-Automated Patch Management: Use AWS Systems Manager Patch Manager to automate patching for EC2 instances.
-Regular Updates: Regularly update software, services, and libraries to the latest security patches.
-8. Application Security:
-API Gateway Security: Secure APIs using AWS API Gateway with usage plans, throttling, and API keys.
-WAF (Web Application Firewall): Use AWS WAF to protect against common web exploits like SQL injection and cross-site scripting.
-Secrets Management: Use AWS Secrets Manager or Parameter Store to manage sensitive information like database credentials and API keys securely.
-9. Key Management:
-Rotate Keys Regularly: Regularly rotate encryption keys and IAM credentials using AWS KMS and Secrets Manager.
-Limit Access to Keys: Restrict access to keys only to applications or services that need them.
-10. Security Audits and Penetration Testing:
-Regular Audits: Perform regular security audits and vulnerability scans to detect weak points in your infrastructure.
-Penetration Testing: Periodically conduct penetration testing to simulate attacks and assess the security of your AWS environment. Follow AWS’s policies on authorized pen testing activities.
+For every mkt site do this when they are good.
+
+Create AMI (Amazon Machine Image)
+Create EBS Snapshots
+Automate Backups Using AWS Backup
+
+Apply the below for the above
+Use Tags and Naming Conventions 
+Monitor Backup Health (use cloud Watch)
+
+1. Backup Task Definitions
+Steps:
+Export Task Definition: Go to the ECS console, navigate to your task definition, and choose the latest version.
+Click Actions > View JSON.
+Save the JSON file locally or in a version control system (e.g., Git).
+
+2. Backup Container Images
+Steps:
+Ensure your Docker images are stored in a reliable container registry like Amazon ECR or Docker Hub.
+Tag your images with a version number or commit hash before pushing them.
+Pull and Push Commands:
+docker pull <image>:<tag>
+docker tag <image>:<tag> <repository>/<image>:<backup-tag>
+docker push <repository>/<image>:<backup-tag>
+
+3. Backup ECS Service Configuration
+Steps:
+Go to the ECS console and select the cluster.
+Choose the service you want to back up.
+Document or export service configuration details like load balancers, desired count, and deployment settings.
+
+4. Backup Cluster Configuration
+Steps:
+Document your ECS cluster configuration, including cluster name, instance type, auto-scaling policies, and network settings.
+If using EC2 launch type, ensure your EC2 instances are backed up with AMIs or snapshots.
+
+5. Backup Environment Variables and Secrets
+Steps:
+List all environment variables used in your task definitions.
+Backup secrets stored in AWS Secrets Manager or Parameter Store by exporting them to a secure location.
+
+6. Automate Backups Using Infrastructure as Code (IaC)
+Steps:
+Use tools like AWS CloudFormation or Terraform to define your ECS infrastructure.
+Store IaC templates in a version control system for automated backups and easy recovery.
+
+7. Test Backup Integrity
+Steps:
+Deploy a test environment using your backed-up task definitions, container images, and service configurations.
+Verify that the deployment works as expected and matches the original setup.
+
+8. Monitor and Audit Backups
+Steps:
+Set up CloudWatch or AWS Config to monitor changes in ECS configurations.
+Regularly review and audit your backup processes to ensure they are up to date and effective.
