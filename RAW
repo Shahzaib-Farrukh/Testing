@@ -1,41 +1,128 @@
-Use IAM roles to give your EC2 instances access to AWS resources
+Protecting your web server against different kinds of attacks is a crucial responsibility for any system administrator.  ModEvasive is an Apache web server module that helps you to protect your web server in the event of DoS, DDoS, and brute-force attacks. These types of attacks cause the server to run out of memory, crashing your website.
 
-IAM roles allow you to give your EC2 instances access to AWS resources without having to embed your AWS credentials in your application code. IAM roles are more secure than using access keys because they allow you to control exactly what permissions your EC2 instances have.
+The mod_evasive module works by creating a hash table of IP Addresses and URIs and monitoring for suspicious incoming server requests, such as:
 
-2. Configure security groups to control traffic to your EC2 instances
+Making more than 100 concurrent connections per second.
+Requesting the same page several times per second.
+If such a suspicious request occurs, the mod_evasive module sends a 403 error and blocks the IP address.
 
-Security groups act as a firewall for your EC2 instances, controlling traffic both to and from your instances. By default, all traffic is denied and you must explicitly allow traffic that you want to allow.
+In this tutorial, we will show you how to install and configure mod_evasive with Apache on an Ubuntu 18.04 server.
 
-When configuring security groups, you should only allow the traffic that your application needs. For example, if your application only needs to communicate with other instances in your VPC, you should only allow traffic from those instances.
+Step 1 – Install mod_evasive
+Before starting, Apache webserver needs to be installed on your server. If not installed, you can install it with the following command:
 
-3. Use key pairs to encrypt traffic to and from your EC2 instances
+apt-get install apache2 apache2-utils -y
+Once Apache web server is installed, you can install mod_evasive with the following command:
 
-Key pairs allow you to encrypt traffic to and from your EC2 instances. By using a key pair, you can ensure that only authorized users can access your instances.
+apt-get install libapache2-mod-evasive -y
+During the installation, you will be asked to configure a Postfix mail server for email notification. You can choose your desired option to complete the installation. If you are unsure, just choose local only or no configuration.
 
-4. Use Amazon EBS encryption to encrypt data at rest
 
-Amazon EBS encryption encrypts data at rest, ensuring that it is protected even if the underlying storage is compromised. Amazon EBS encryption is transparent to your applications and requires no changes to your application code.
+After installing mod_evasive, you can verify whether the mod_evasive module is enabled by running the following command:
 
-5. Use Amazon S3 encryption to encrypt data in transit
+apachectl -M | grep evasive
+You should get the following output:
 
-Amazon S3 encryption encrypts data in transit, ensuring that it is protected as it travels between your EC2 instance and Amazon S3. Amazon S3 encryption is transparent to your applications and requires no changes to your application code.
+[Mon Jan 27 13:55:35.707317 2020] [so:warn] [pid 29031] AH01574: module dav_module is already loaded, skipping
+ evasive20_module (shared)
+At this point, the mod_evasive module is installed and enabled. You can now proceed to the next step.
 
-6. Use Amazon CloudWatch to monitor activity in your AWS account
+Step 2 – Configure mod_evasive
+The default configuration file of mod_evasive is located at /etc/apache2/mods-enabled/evasive.conf. You will need to configure this file per your requirements.
 
-Amazon CloudWatch allows you to monitor activity in your AWS account, including activity on your EC2 instances. With Amazon CloudWatch, you can set up alarms that will notify you if there is unusual activity in your account.
+You can open this file using the nano editor as shown below:
 
-7. Use AWS CloudTrail to log activity in your AWS account
+nano /etc/apache2/mods-enabled/evasive.conf
+Change the file as shown below. We recommend amending DOSEmailNotify to the address you want the email sent to (if configured) and DOSSystemCommand – for example “su – richard -c ‘/sbin… %s …’”
 
-AWS CloudTrail is a service that logs all activity in your AWS account. With AWS CloudTrail, you can see who made changes to your AWS resources, when they made those changes, and what those changes were.
+<IfModule mod_evasive20.c>
+    DOSHashTableSize    3097
+    DOSPageCount        2
+    DOSSiteCount        50
+    DOSPageInterval     1
+    DOSSiteInterval     1
+    DOSBlockingPeriod   100
+    DOSEmailNotify      root@ubuntu1804  
+    DOSSystemCommand    "su - someuser -c '/sbin/... %s ...'"
+    DOSLogDir           "/var/log/mod_evasive"
+</IfModule>
+Save and close the file when you are finished.
 
-8. Use Amazon Inspector to assess the security of your EC2 instances
+A brief explanation of each option is shown below:
 
-Amazon Inspector is a security assessment service that can help you identify vulnerabilities in your EC2 instances. Amazon Inspector assesses your EC2 instances for compliance with security best practices and provides you with a report of findings.
+DOSHashTableSize: mod_evasive uses this option to control the hash table size. It is recommended to increase this if you have a busy web server.
+DOSPageCount: This option specifies the threshold limit for the number of requests allowed to the same URI per second. Once the threshold limit has been exceeded, the client’s IP address will be blacklisted.
+DOSSiteCount: This option specifies the limit on the total number of requests allowed to the same IP address.
+DOSPageInterval: This option specifies the page count interval.
+DOSSiteInterval: This option specifies the site count interval.
+DOSBlockingPeriod : This option defines the amount of time in seconds that a client will be blocked.
+DOSEmailNotify: This option sends an email to the specified address when an IP address has been blacklisted.
+DOSSystemCommand: Whenever an IP address has been blacklisted, the specified system command will be executed.
+DOSLogDir: This option defines the mod_evasive log directory.
+Next, create a directory to store the mod_evasive log and change its ownership to www-data with the following command:
 
-9. Use AWS Config to track changes to your AWS resources
+mkdir /var/log/mod_evasive
+chown -R www-data:www-data /var/log/mod_evasive
+Finally, restart the Apache service to implement the changes:
 
-AWS Config is a service that allows you to track changes to your AWS resources. With AWS Config, you can see who made changes to your resources, when those changes were made, and what those changes were.
+systemctl restart apache2
+Step 3 – Test mod_evasive
+At this point, the mod_evasive module is installed and configured. It’s time to test whether the module is working correctly.
 
-10. Use AWS Trusted Advisor to check for potential security issues
+Go to the remote system and send a bulk page request to the server using the ab command:
 
-AWS Trusted Advisor is a service that checks for potential security issues in your AWS account. AWS Trusted Advisor can help you identify areas of your account that may need additional security.
+ab -n 1000 -c 20 http://your-server-ip/
+
+This command will cause the equivalent of a DoS attack by sending 1000 page requests in 10 concurrent connections.
+
+On the server, check the mail log by running the following command:
+
+tail -15 /var/mail/root
+You should see that the client IP address has been blacklisted by mod_evasive:
+
+Received: by ubuntu1804 (Postfix, from userid 33)
+            id B0C3EC1753; Mon, 27 Jan 2020 14:15:09 +0000 (UTC)
+To: root@ubuntu1804
+MIME-Version: 1.0
+Content-Type: text/plain; charset="ANSI_X3.4-1968"
+Content-Transfer-Encoding: 8bit
+Message-Id: <20200127141509.B0C3EC1753@ubuntu1804>
+Date: Mon, 27 Jan 2020 14:15:09 +0000 (UTC)
+From: www-data <www-data@ubuntu1804>
+
+To: root@ubuntu1804
+Subject: HTTP BLACKLIST 103.250.161.100
+
+mod_evasive HTTP Blacklisted 103.250.161.100
+You can also test mod_evasive using the test.pl built-in script. You will need to modify this script to make it works.
+
+You can edit the script as shown below:
+
+nano /usr/share/doc/libapache2-mod-evasive/examples/test.pl
+Find the following line:
+
+print $SOCKET "GET /?$_ HTTP/1.0\n\n";
+Replace it with the following:
+
+print $SOCKET "GET /?$_ HTTP/1.0\r\nHost: 127.0.0.1\r\n\r\n";
+Save and close the file when you are finished. Then, run the script using the perl command:
+
+perl /usr/share/doc/libapache2-mod-evasive/examples/test.pl
+If everything works correctly, you should get the following output:
+
+HTTP/1.1 403 Forbidden
+HTTP/1.1 403 Forbidden
+HTTP/1.1 403 Forbidden
+HTTP/1.1 403 Forbidden
+HTTP/1.1 403 Forbidden
+HTTP/1.1 403 Forbidden
+HTTP/1.1 403 Forbidden
+HTTP/1.1 403 Forbidden
+HTTP/1.1 403 Forbidden
+HTTP/1.1 403 Forbidden
+HTTP/1.1 403 Forbidden
+HTTP/1.1 403 Forbidden
+HTTP/1.1 403 Forbidden
+HTTP/1.1 403 Forbidden
+HTTP/1.1 403 Forbidden
+HTTP/1.1 403 Forbidden
