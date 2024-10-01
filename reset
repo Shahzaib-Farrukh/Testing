@@ -1,38 +1,10 @@
-# Use the official PHP image as the base
-FROM php:8.2-apache
-
-# Install necessary PHP extensions for Moodle
-RUN apt-get update && apt-get install -y \
-    libfreetype6-dev \
-    libjpeg62-turbo-dev \
-    libpng-dev \
-    libzip-dev \
-    libicu-dev \
-    libxslt-dev \
-    unzip \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j$(nproc) gd \
-    && docker-php-ext-install zip mysqli pdo pdo_mysql intl xsl
-
-# Enable Apache mod_rewrite
-RUN a2enmod rewrite
-
-# Set up Moodle data directory
-RUN mkdir -p /var/www/html/moodledata \
-    && chown -R www-data:www-data /var/www/html/moodledata
-
-# Copy Moodle files
-COPY moodle /var/www/html/moodle
-
-# Set correct permissions
-RUN chown -R www-data:www-data /var/www/html/moodle
-
-# Add Apache configuration for Moodle
-COPY moodle.conf /etc/apache2/sites-available/moodle.conf
-RUN a2ensite moodle
-
-# Expose port 80
-EXPOSE 80
-
-# Set the working directory
-WORKDIR /var/www/html/moodle
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple HTML Page</title>
+</head>
+<body>
+    <h1>Hello, World!</h1>
+    <p>This is a basic HTML file.</p>
+</body>
+</html>
