@@ -1,25 +1,24 @@
-CRITERIA NOT APPLICABLE TO THE SYSTEM 
+Virtual access to AWS cloud environments is approved by an authorized individual.
 
- 
+Virtual access is revoked within 24 hours of the employee or vendor account being deactivated.
 
-All Common Criteria/Security criteria were applicable to the Boundless Learning’s System. 
+Virtual access permissions to cloud environments are reviewed on a quarterly basis by appropriate personnel.
 
-  
+AWS provides continuous monitoring and logging of cloud environments, with retention of logs for 90 days, unless limited by legal or contractual obligations.
 
-SUBSERVICE ORGANIZATIONS 
+Access to cloud-based services is managed by electronic authentication and authorization controls.
 
- 
+AWS maintains formal policies that provide guidance for information security within the organization and the supporting cloud infrastructure.
 
-This report does not include the Cloud Hosting Services provided by AWS, as the company relies solely on cloud-based infrastructure. 
+AWS has a process in place to review environmental and geo-political risks before launching a new region.
 
-  
+AWS cloud infrastructure is protected by multiple layers of security, including firewalls and intrusion detection systems.
 
-Subservice Description of Services 
+AWS provides load balancing and monitoring to ensure appropriate levels of performance for cloud-based services.
 
- 
+AWS cloud data centers use Uninterruptible Power Supply (UPS) systems and backup generators to ensure availability during outages.
 
-The Cloud Hosting Services provided by AWS support the virtual infrastructure of the entity’s services. 
+Contracts with third-party service providers ensure compliance with AWS policies for cloud operations, including fire suppression, power redundancy, and incident response.
 
-  
+Contracts are in place with third-party cloud service providers that include provisions for maintaining the security, availability, and redundancy of cloud-based services. These contracts ensure that services such as fire suppression, power redundancy, and environmental controls within data centers supporting the cloud infrastructure are in compliance with AWS standards. Additionally, contracts include provisions requiring the communication of incidents or events that could impact AWS assets and/or customers.
 
-Subservice Provider – AWS 
