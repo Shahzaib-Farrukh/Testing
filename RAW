@@ -16,7 +16,7 @@ AWS cloud infrastructure is protected by multiple layers of security, including 
 
 AWS provides load balancing and monitoring to ensure appropriate levels of performance for cloud-based services.
 
-AWS cloud data centers use Uninterruptible Power Supply (UPS) systems and backup generators to ensure availability during outages.
+AWS cloud infrastructure is built to ensure high availability during outages through redundant systems, including failover mechanisms, data replication, and geographically dispersed cloud regions.
 
 Contracts with third-party service providers ensure compliance with AWS policies for cloud operations, including fire suppression, power redundancy, and incident response.
 
