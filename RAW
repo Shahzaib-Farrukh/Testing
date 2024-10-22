@@ -33,3 +33,15 @@ Name of application: Amazon CloudWatch Logs
 Vendor name: Amazon Web Services, Inc.
 Current version number: No specific versioning for CloudWatch Logs.
 Latest update of definitions: Not applicable.
+
+7. Qualys
+Name of application: Qualys Cloud Platform (Vulnerability Management, Detection, and Response - VMDR)
+Vendor name: Qualys, Inc.
+Current version number: The Qualys platform is cloud-based and continuously updated, so there isn't a specific version number.
+Latest update of definitions: Qualys updates its vulnerability database automatically with the latest threat intelligence.
+
+8. Snyk
+Name of application: Snyk
+Vendor name: Snyk Ltd.
+Current version number: Snyk is a cloud-based service, so it operates on the latest version.
+Latest update of definitions: Snyk continuously updates its vulnerability database for open-source security, containers, and infrastructure as code (IaC).
