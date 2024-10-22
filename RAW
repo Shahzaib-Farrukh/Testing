@@ -1,24 +1,35 @@
-Virtual access to AWS cloud environments is approved by an authorized individual.
+1. Datadog
+Name of application: Datadog
+Vendor name: Datadog, Inc.
+Current version number: Datadog is a cloud-based service, so it operates continuously on the latest version.
+Latest update of definitions: Not applicable for Datadog as it doesn’t use traditional security definitions or signatures. It updates automatically.
 
-Virtual access is revoked within 24 hours of the employee or vendor account being deactivated.
+2. AWS GuardDuty
+Name of application: AWS GuardDuty
+Vendor name: Amazon Web Services, Inc.
+Current version number: AWS services don’t have version numbers as they are cloud-managed and updated continuously.
+Latest update of definitions: GuardDuty updates threat intelligence automatically with the latest definitions from AWS.
 
-Virtual access permissions to cloud environments are reviewed on a quarterly basis by appropriate personnel.
+3. AWS WAF (Web Application Firewall)
+Name of application: AWS WAF
+Vendor name: Amazon Web Services, Inc.
+Current version number: AWS WAF doesn’t have specific version numbers.
+Latest update of definitions: AWS WAF updates automatically with new rule sets and threat intelligence.
 
-AWS provides continuous monitoring and logging of cloud environments, with retention of logs for 90 days, unless limited by legal or contractual obligations.
+4. Wordfence (WordPress Security Plugin)
+Name of application: Wordfence Security
+Vendor name: Defiant, Inc.
+Current version number: [You would need to check your WordPress admin dashboard or plugin repository for the current version number of Wordfence.]
+Latest update of definitions: Wordfence updates its malware signatures and firewall rules regularly; the last update can be checked within the plugin dashboard.
 
-Access to cloud-based services is managed by electronic authentication and authorization controls.
+5. AWS CloudTrail
+Name of application: AWS CloudTrail
+Vendor name: Amazon Web Services, Inc.
+Current version number: CloudTrail is a managed service without versioning.
+Latest update of definitions: Not applicable.
 
-AWS maintains formal policies that provide guidance for information security within the organization and the supporting cloud infrastructure.
-
-AWS has a process in place to review environmental and geo-political risks before launching a new region.
-
-AWS cloud infrastructure is protected by multiple layers of security, including firewalls and intrusion detection systems.
-
-AWS provides load balancing and monitoring to ensure appropriate levels of performance for cloud-based services.
-
-AWS cloud infrastructure is built to ensure high availability during outages through redundant systems, including failover mechanisms, data replication, and geographically dispersed cloud regions.
-
-Contracts with third-party service providers ensure compliance with AWS policies for cloud operations, including fire suppression, power redundancy, and incident response.
-
-Contracts are in place with third-party cloud service providers that include provisions for maintaining the security, availability, and redundancy of cloud-based services. These contracts ensure that services such as fire suppression, power redundancy, and environmental controls within data centers supporting the cloud infrastructure are in compliance with AWS standards. Additionally, contracts include provisions requiring the communication of incidents or events that could impact AWS assets and/or customers.
-
+6. Amazon CloudWatch Logs
+Name of application: Amazon CloudWatch Logs
+Vendor name: Amazon Web Services, Inc.
+Current version number: No specific versioning for CloudWatch Logs.
+Latest update of definitions: Not applicable.
