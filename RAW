@@ -1,47 +1,14 @@
-1. Datadog
-Name of application: Datadog
-Vendor name: Datadog, Inc.
-Current version number: Datadog is a cloud-based service, so it operates continuously on the latest version.
-Latest update of definitions: Not applicable for Datadog as it doesn’t use traditional security definitions or signatures. It updates automatically.
+# Log in to source ECR
+aws ecr get-login-password --region us-east-1 --profile source-profile | docker login --username AWS --password-stdin 123456789012.dkr.ecr.us-east-1.amazonaws.com
 
-2. AWS GuardDuty
-Name of application: AWS GuardDuty
-Vendor name: Amazon Web Services, Inc.
-Current version number: AWS services don’t have version numbers as they are cloud-managed and updated continuously.
-Latest update of definitions: GuardDuty updates threat intelligence automatically with the latest definitions from AWS.
+# Pull the image from source ECR
+docker pull 123456789012.dkr.ecr.us-east-1.amazonaws.com/my-app:latest
 
-3. AWS WAF (Web Application Firewall)
-Name of application: AWS WAF
-Vendor name: Amazon Web Services, Inc.
-Current version number: AWS WAF doesn’t have specific version numbers.
-Latest update of definitions: AWS WAF updates automatically with new rule sets and threat intelligence.
+# Tag the image for destination ECR
+docker tag 123456789012.dkr.ecr.us-east-1.amazonaws.com/my-app:latest 098765432109.dkr.ecr.us-east-1.amazonaws.com/my-app:latest
 
-4. Wordfence (WordPress Security Plugin)
-Name of application: Wordfence Security
-Vendor name: Defiant, Inc.
-Current version number: [You would need to check your WordPress admin dashboard or plugin repository for the current version number of Wordfence.]
-Latest update of definitions: Wordfence updates its malware signatures and firewall rules regularly; the last update can be checked within the plugin dashboard.
+# Log in to destination ECR
+aws ecr get-login-password --region us-east-1 --profile destination-profile | docker login --username AWS --password-stdin 098765432109.dkr.ecr.us-east-1.amazonaws.com
 
-5. AWS CloudTrail
-Name of application: AWS CloudTrail
-Vendor name: Amazon Web Services, Inc.
-Current version number: CloudTrail is a managed service without versioning.
-Latest update of definitions: Not applicable.
-
-6. Amazon CloudWatch Logs
-Name of application: Amazon CloudWatch Logs
-Vendor name: Amazon Web Services, Inc.
-Current version number: No specific versioning for CloudWatch Logs.
-Latest update of definitions: Not applicable.
-
-7. Qualys
-Name of application: Qualys Cloud Platform (Vulnerability Management, Detection, and Response - VMDR)
-Vendor name: Qualys, Inc.
-Current version number: The Qualys platform is cloud-based and continuously updated, so there isn't a specific version number.
-Latest update of definitions: Qualys updates its vulnerability database automatically with the latest threat intelligence.
-
-8. Snyk
-Name of application: Snyk
-Vendor name: Snyk Ltd.
-Current version number: Snyk is a cloud-based service, so it operates on the latest version.
-Latest update of definitions: Snyk continuously updates its vulnerability database for open-source security, containers, and infrastructure as code (IaC).
+# Push the image to destination ECR
+docker push 098765432109.dkr.ecr.us-east-1.amazonaws.com/my-app:latest
