@@ -1,61 +1,22 @@
-Data Centers:
-
-There are three main data centers, with the first two being the most commonly used:
-
-	·     Mahwah - NJRAR - RR
-	·     GAALP - Windward - WW
-	·     Louisville
-
-Environments:
-
-We work in two primary environments:
-
-	·     Production - CPE
-	·     Textnet (also referred to as DEV) - CDE
-
-Operating Systems:
-
-We support two operating systems:
-
-	·     Windows, referred to as WIN
-	·     Linux, referred to as LIN
-
-Storage:
-
-There are two types of storage:
-
-	·     SAN (Storage Area Network) - hard disk capacity is greater than 1TB
-	·     VSAN (Virtual SAN) - hard disk capacity is less than 1TB
-        Note: 1TB = 1024 GB
-
-Clusters:
-
-Clusters are defined by a combination of four factors: Data Center, Environment, Operating System, and Storage. Here are examples of cluster naming conventions:
-
-    NJRAR_CPEWIN_VSAN001: Represents Mahwah (RR) data center, CPE is Production environment, WIN is Windows OS, and VSAN storage.
-    GAALP_CDELIN_SAN004: Represents GAALP (WW) data center, CDE Testnet/DEV environment,LIN is  Linux OS, and SAN storage.
-
-Types of Tickets:
-
-There are two main types of tickets:
-
-    Validation Tickets: No sheet attachment is included.
-    Virtual Tickets: Includes a sheet attached with an SMC number.
-
-Ticket Validation Guidelines:
-
-    Storage Upgrades:
-        Storage upgrades typically involve SAN and VSAN storage.
-        Review the ticket to confirm the requirements are correct; if so, simply accept the ticket and close it.
-
-    CPU, Memory, and vMotion Upgrades:
-        vMotion Explanation: vMotion is the process of migrating a server from one cluster to another that meets the specified requirements.
-        Check the availability of the specified cluster. If unavailable, identify an alternative cluster and perform vMotion.
-        Additional Requirement:
-            Verify the Number of Sockets: If there is only 1 socket, specify in the request details to "Enable hot add for CPU and Memory."
-            If the requirement is CPU-only and there is 1 socket, still include the note to "Enable hot add for CPU and Memory."
-            Same as for memory.
-If the storage is SAN we need nothing to do just click yes below the table of requirement details.
-And if the storage is Vsan we have to assign data store with them too.
-Like   NJRAR_CPEWIN_VSAN001 it’s a normal cluster but when we have to assign data store its be like
-  NJRAR_CPEWIN_VSAN001_VMP001.
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AllowALBAccessLogs",
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "elasticloadbalancing.amazonaws.com"
+      },
+      "Action": "s3:PutObject",
+      "Resource": "arn:aws:s3:::boundless-s3-access-logs-eu-west-1-954157537211/*",
+      "Condition": {
+        "StringEquals": {
+          "aws:SourceAccount": "<AWS_ACCOUNT_ID>"
+        },
+        "ArnLike": {
+          "aws:SourceArn": "arn:aws:elasticloadbalancing:eu-west-1:<AWS_ACCOUNT_ID>:loadbalancer/*"
+        }
+      }
+    }
+  ]
+}
