@@ -1,0 +1,96 @@
+#!/bin/bash
+
+# Check if AWS CLI is installed
+if ! command -v aws &> /dev/null; then
+    echo "AWS CLI is not installed. Please install it first."
+    exit 1
+fi
+
+# Set your AWS region
+AWS_REGION="eu-west-1"
+
+# Step 1: List and select ECS Clusters
+echo "Fetching ECS clusters..."
+CLUSTERS=$(aws ecs list-clusters --region "$AWS_REGION" --query "clusterArns[]" --output text)
+
+if [ -z "$CLUSTERS" ]; then
+    echo "No ECS clusters found."
+    exit 1
+fi
+
+echo "Available ECS Clusters:"
+select CLUSTER in $CLUSTERS; do
+    if [ -n "$CLUSTER" ]; then
+        echo "Selected Cluster: $CLUSTER"
+        break
+    else
+        echo "Invalid choice. Try again."
+    fi
+done
+
+# Step 2: List and select Services in the chosen cluster
+echo "Fetching services in $CLUSTER..."
+SERVICES=$(aws ecs list-services --cluster "$CLUSTER" --region "$AWS_REGION" --query "serviceArns[]" --output text)
+
+if [ -z "$SERVICES" ]; then
+    echo "No services found in $CLUSTER."
+    exit 1
+fi
+
+echo "Available ECS Services:"
+select SERVICE in $SERVICES; do
+    if [ -n "$SERVICE" ]; then
+        echo "Selected Service: $SERVICE"
+        break
+    else
+        echo "Invalid choice. Try again."
+    fi
+done
+
+# Step 3: List and select Tasks for the chosen service
+echo "Fetching tasks for $SERVICE..."
+TASKS=$(aws ecs list-tasks --cluster "$CLUSTER" --service-name "$SERVICE" --region "$AWS_REGION" --query "taskArns[]" --output text)
+
+if [ -z "$TASKS" ]; then
+    echo "No running tasks found for $SERVICE."
+    exit 1
+fi
+
+echo "Available ECS Tasks:"
+select TASK in $TASKS; do
+    if [ -n "$TASK" ]; then
+        echo "Selected Task: $TASK"
+        break
+    else
+        echo "Invalid choice. Try again."
+    fi
+done
+
+# Step 4: List and select a Container in the Task
+echo "Fetching containers for $TASK..."
+CONTAINERS=$(aws ecs describe-tasks --cluster "$CLUSTER" --tasks "$TASK" --region "$AWS_REGION" --query "tasks[0].containers[].name" --output text)
+
+if [ -z "$CONTAINERS" ]; then
+    echo "No containers found for $TASK."
+    exit 1
+fi
+
+echo "Available Containers:"
+select CONTAINER in $CONTAINERS; do
+    if [ -n "$CONTAINER" ]; then
+        echo "Selected Container: $CONTAINER"
+        break
+    else
+        echo "Invalid choice. Try again."
+    fi
+done
+
+# Step 5: Execute Command in the Container
+echo "Connecting to container $CONTAINER in task $TASK..."
+aws ecs execute-command \
+    --cluster "$CLUSTER" \
+    --task "$TASK" \
+    --container "$CONTAINER" \
+    --region "$AWS_REGION" \
+    --interactive \
+    --command "/bin/sh"
