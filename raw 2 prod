@@ -18,7 +18,7 @@
         "ecr:PutImage",
         "ecr:UploadLayerPart"
       ],
-      "Resource": "arn:aws:ecr:eu-west-1:954157537211:repository/pols/php-apache-oxfordcourses"
+      "Resource": "arn:aws:ecr:eu-west-1:account-number:repository/pols/php-apache-oxfordcourses"
     }
   ]
 }
