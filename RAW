@@ -5,7 +5,7 @@
       "Sid": "AllowCrossAccountPush",
       "Effect": "Allow",
       "Principal": {
-        "AWS": "arn:aws:iam::026984762113:root"
+        "AWS": "arn:aws:iam::accountnumber:root"
       },
       "Action": [
         "ecr:BatchCheckLayerAvailability",
