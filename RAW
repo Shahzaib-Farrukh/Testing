@@ -1,41 +1,67 @@
-cio-pols-nonprod
-	pols-dev = 6 services
-	pols-dev-moodledemo-app = 1 task
-	pols-dev-regis-app = 1 task
-	pols-dev-usc-gould-app = 1 task
-	pols-dev-usc-mapp-app = 1 task
-	pols-dev-usc-mcm-app = 1 task
-	pols-dev-usc-mpa-app = 1 task
+cio-pols-nonprod 
+us-east-1
+•	pols-dev = 6 services
+o	pols-dev-moodledemo-app = 1 task
+o	pols-dev-regis-app = 1 task
+o	pols-dev-usc-gould-app = 1 task
+o	pols-dev-usc-mapp-app = 1 task
+o	pols-dev-usc-mcm-app = 1 task
+o	pols-dev-usc-mpa-app = 1 task
 
-	pols-smk = 6 services
-	pols-smk-moodledemo-app = 1 task
-	pols-smk-regis-app = 1 task
-	pols-smk-usc-gould-app = 1 task
-	pols-smk-usc-mapp-app = 1 task
-	pols-smk-usc-mcm-app = 1 task
-	pols-smk-usc-mpa-app = 1 task
-	pols-dev-owncloud = 1 service
-	pols-dev-owncloud-app = 1 task
+•	pols-smk = 6 services
+o	pols-smk-moodledemo-app = 1 task
+o	pols-smk-regis-app = 1 task
+o	pols-smk-usc-gould-app = 1 task
+o	pols-smk-usc-mapp-app = 1 task
+o	pols-smk-usc-mcm-app = 1 task
+o	pols-smk-usc-mpa-app = 1 task
+
+•	pols-dev-owncloud = 1 service
+o	pols-dev-owncloud-app = 1 task
+eu-west-1
+•	pols-dev-eu = 2 services
+o	pols-dev-eu-oxfordcourse-app = 4 tasks
+o	pols-dev-eu-sassoon-app = 1 task
+
+•	pols-smk-eu = 1 services
+o	pols-smk-eu-oxfordcourses-app = 1 task
 
 cio-pols-prod
-	pols-prd = 6 services
-	pols-prd-moodledemo-app = 2 tasks
-	pols-prd-regis-app = 5 tasks
-	pols-prd-usc-gould-app = 5 tasks
-	pols-prd-usc-mapp-app = 5 tasks
-	pols-prd-usc-mcm-app = 5 tasks
-	pols-prd-usc-mpa-app = 5 tasks
+us-east-1
+•	pols-prd = 6 services
+o	pols-prd-moodledemo-app = 2 tasks
+o	pols-prd-regis-app = 5 tasks
+o	pols-prd-usc-gould-app = 5 tasks
+o	pols-prd-usc-mapp-app = 5 tasks
+o	pols-prd-usc-mcm-app = 5 tasks
+o	pols-prd-usc-mpa-app = 5 tasks
 
-	pols-prd-owncloud = 1 service
-	pols-prd-owncloud-app = 2 tasks
-
+•	pols-prd-owncloud = 1 service
+o	pols-prd-owncloud-app = 2 tasks
+eu-west-1
+•	pols-prd-eu = 2 service
+o	pols-prd-eu-oxfordcourses-app = 2 tasks
+o	pols-prd-eu-sassoon-app = 8 tasks
 cms-nonprod
-	pols-eu-dev-shared = 8 services
-	bsg-oxford-pols-dev-app = 1 task
-	chat-backend-pols-dev-chat-app = 1 task
-	kcl-pols-dev-app = 1 task
-	northumbria-pols-dev-app = 1 task
-	oxford-pols-dev-app = 1 task
-	Sussex-drupal-pols-dev-app = 1 task
-	Sussex-wp-pols-dev-app = 1 task
-	Wordpress-worker-pols-dev-app = 1 task
+eu-west-1
+•	pols-eu-dev-shared = 8 services
+o	bsg-oxford-pols-dev-app = 1 task
+o	chat-backend-pols-dev-chat-app = 1 task
+o	kcl-pols-dev-app = 1 task
+o	northumbria-pols-dev-app = 1 task
+o	oxford-pols-dev-app = 1 task
+o	Sussex-drupal-pols-dev-app = 1 task
+o	Sussex-wp-pols-dev-app = 1 task
+o	Wordpress-worker-pols-dev-app = 1 task
+Cms-prd
+eu-west-1
+•	pols-eu-prd-shared = 9 services
+o	bsg-oxford-pols-prd-app = 4 task
+o	chat-backend-pols-prd-chat-app = 2 task
+o	kcl-pols-prd-app = 2 task
+o	Manchester-drupal-pols-prd-app = 0 task
+o	Manchester-wp-pols-prd-app = 0 task
+o	northumbria-pols-prd-app = 2 task
+o	oxford-pols-prd-app = 2 task
+o	Sussex-drupal-pols-prd-app = 2 task
+o	Sussex-wp-pols-prd-app = 3 task
