@@ -1,20 +1,41 @@
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Sid": "AllowCrossAccountPush",
-      "Effect": "Allow",
-      "Principal": {
-        "AWS": "arn:aws:iam::accountnumber:root"
-      },
-      "Action": [
-        "ecr:BatchCheckLayerAvailability",
-        "ecr:CompleteLayerUpload",
-        "ecr:GetDownloadUrlForLayer",
-        "ecr:InitiateLayerUpload",
-        "ecr:PutImage",
-        "ecr:UploadLayerPart"
-      ]
-    }
-  ]
-}
+cio-pols-nonprod
+	pols-dev = 6 services
+	pols-dev-moodledemo-app = 1 task
+	pols-dev-regis-app = 1 task
+	pols-dev-usc-gould-app = 1 task
+	pols-dev-usc-mapp-app = 1 task
+	pols-dev-usc-mcm-app = 1 task
+	pols-dev-usc-mpa-app = 1 task
+
+	pols-smk = 6 services
+	pols-smk-moodledemo-app = 1 task
+	pols-smk-regis-app = 1 task
+	pols-smk-usc-gould-app = 1 task
+	pols-smk-usc-mapp-app = 1 task
+	pols-smk-usc-mcm-app = 1 task
+	pols-smk-usc-mpa-app = 1 task
+	pols-dev-owncloud = 1 service
+	pols-dev-owncloud-app = 1 task
+
+cio-pols-prod
+	pols-prd = 6 services
+	pols-prd-moodledemo-app = 2 tasks
+	pols-prd-regis-app = 5 tasks
+	pols-prd-usc-gould-app = 5 tasks
+	pols-prd-usc-mapp-app = 5 tasks
+	pols-prd-usc-mcm-app = 5 tasks
+	pols-prd-usc-mpa-app = 5 tasks
+
+	pols-prd-owncloud = 1 service
+	pols-prd-owncloud-app = 2 tasks
+
+cms-nonprod
+	pols-eu-dev-shared = 8 services
+	bsg-oxford-pols-dev-app = 1 task
+	chat-backend-pols-dev-chat-app = 1 task
+	kcl-pols-dev-app = 1 task
+	northumbria-pols-dev-app = 1 task
+	oxford-pols-dev-app = 1 task
+	Sussex-drupal-pols-dev-app = 1 task
+	Sussex-wp-pols-dev-app = 1 task
+	Wordpress-worker-pols-dev-app = 1 task
